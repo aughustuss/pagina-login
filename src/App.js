@@ -1,9 +1,17 @@
 import React from "react"
-
-export default function App(){
+import { Route, BrowserRouter, Router, Routes } from "react-router-dom";
+import { Navbar } from "./components/navbar";
+function App(){
   return(
-    <div>
-      Nada
-    </div>
+    <>
+      <BrowserRouter>
+      <Navbar/>
+        <Routes>
+          <Route></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
+
+export default App;
