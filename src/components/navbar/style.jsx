@@ -1,29 +1,53 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Nav = styled.nav`
+export const Navigation = styled.header`
     
-    display: flex;
-    align-items: center;
     width: 100%;
-    height: 12.5vh;
-    background-color: black;
+    z-index: 100;
+    top: 0;
+    left: 0;
     position: fixed;
-    z-index: -1;
+    overflow: hidden;
+    margin: auto;
 
 `
 
-export const LinksMenu = styled.div`
-    justify-: flex-end;
-    width: 80%;
+export const Nav = styled.nav`
 
+    background-color: black;
+    display: flex;
+    height: 12.5vh;
+    flex-direction: row;
+
+`
+
+export const Logo = styled.div`
+    display: flex;
+    flex-grow: 1;
+    color: green;
+    align-items: center;
+    padding: 1rem;
+`
+
+export const LinksMenu = styled.div`
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const Links = styled(Link)`
     
+    text-transform: uppercase;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
     font-weight: bold;
+    padding: 1rem;
+
+    &:hover{
+        color: red;
+    }
 
 `
