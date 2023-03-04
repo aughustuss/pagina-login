@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, {useState} from "react"
+import { Modal } from "../modal";
 import { 
     Navigation,
     Nav,
@@ -8,6 +8,13 @@ import {
     LinksMenu
 } from "./style"
 export const Navbar = () => {
+
+    const [openModal, setopenModal] = useState(false);
+    
+    const showModal = () => {
+        setopenModal(prev => !prev);
+    }
+
     return (
         <>
             <Navigation>
@@ -15,11 +22,13 @@ export const Navbar = () => {
                     <Logo>Brasil Barber's</Logo>
                     <LinksMenu>
                         <Links>Agendar horário</Links>
-                        <Links>Sou barbeiro</Links>
-                        <Links>Login</Links>
+                        <Links>ver barbearias próximas</Links>
+                        <Links>criar uma conta</Links>
+                        <Links onClick={showModal}>fazer login</Links>
                     </LinksMenu>
                 </Nav>
             </Navigation>
+            <Modal openModal={openModal} setopenModal={setopenModal}></Modal>
         </>
     )
 }

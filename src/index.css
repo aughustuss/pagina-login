@@ -6,7 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url('./assets/chairman.jpg');
-  background-size: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 code {
