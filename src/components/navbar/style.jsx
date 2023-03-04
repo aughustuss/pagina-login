@@ -15,7 +15,7 @@ export const Navigation = styled.header`
 
 export const Nav = styled.nav`
 
-    background-color: black;
+    background-color: transparent;
     display: flex;
     height: 12.5vh;
     flex-direction: row;
@@ -25,9 +25,12 @@ export const Nav = styled.nav`
 export const Logo = styled.div`
     display: flex;
     flex-grow: 1;
-    color: green;
+    color: #fff;
     align-items: center;
     padding: 1rem;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
 `
 
 export const LinksMenu = styled.div`
@@ -42,12 +45,22 @@ export const Links = styled(Link)`
     text-transform: uppercase;
     text-decoration: none;
     font-size: 14px;
-    color: white;
+    color: #fff;
     font-weight: bold;
-    padding: 1rem;
+    padding: 0 2rem 1rem 2rem;
 
-    &:hover{
-        color: red;
+    &::after{
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #FFF;
+        transition: width .4s ease-in;
     }
 
+    &:hover::after{
+        width: 100%;
+    }
+
+    
 `

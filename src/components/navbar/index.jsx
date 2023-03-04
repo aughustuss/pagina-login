@@ -12,10 +12,11 @@ export const Navbar = () => {
         <>
             <Navigation>
                 <Nav>
-                    <Logo>Logo</Logo>
+                    <Logo>Brasil Barber's</Logo>
                     <LinksMenu>
-                        <Links>Agendar</Links>
-                        <Links>Entrar</Links>
+                        <Links>Agendar horário</Links>
+                        <Links>Sou barbeiro</Links>
+                        <Links>Login</Links>
                     </LinksMenu>
                 </Nav>
             </Navigation>
