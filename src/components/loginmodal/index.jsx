@@ -1,10 +1,11 @@
 
+import { TextField } from "@mui/material";
 import React, { useState } from "react";
 import {
     ModalDiv,
 } from './style'
 
-export const Modal = ({openModal, setopenModal}) => {
+export const LoginModal = ({openModal, setopenModal}) => {
 
     return (
         <>

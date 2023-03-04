@@ -7,17 +7,14 @@ export const Navigation = styled.header`
     z-index: 100;
     top: 0;
     left: 0;
-    position: fixed;
-    overflow: hidden;
-    margin: auto;
-
+    position: initial;
 `
 
 export const Nav = styled.nav`
 
     background-color: transparent;
     display: flex;
-    height: 12.5vh;
+    height: 100px;
     flex-direction: row;
 
 `
@@ -47,7 +44,7 @@ export const Links = styled(Link)`
     font-size: 12px;
     color: #fff;
     font-weight: bolder;
-    padding: 0 1.5rem 1rem 1.5rem;
+    padding: 1rem 1rem 1rem 1.5rem;
 
     &::after{
         content: "";
