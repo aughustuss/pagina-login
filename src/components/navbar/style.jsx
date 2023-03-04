@@ -44,9 +44,9 @@ export const Links = styled(Link)`
     
     text-transform: uppercase;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
     color: #fff;
-    font-weight: bold;
+    font-weight: bolder;
     padding: 0 1.5rem 1rem 1.5rem;
 
     &::after{
