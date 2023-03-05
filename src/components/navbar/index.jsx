@@ -1,5 +1,4 @@
 import React, {useState} from "react"
-import { StyledInput } from "../input/style";
 import { LoginModal } from "../loginmodal";
 import { 
     Navigation,
@@ -8,6 +7,8 @@ import {
     Links,
     LinksMenu
 } from "./style"
+
+
 export const Navbar = () => {
 
     const [openModal, setopenModal] = useState(false);
@@ -31,7 +32,6 @@ export const Navbar = () => {
             </Navigation>
             <LoginModal openModal={openModal} setopenModal={setopenModal}>
                 
-                <StyledInput type='password' placeholder="Digite sua senha"></StyledInput>
             </LoginModal>
         </>
     )
