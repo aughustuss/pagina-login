@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {
     LoginDiv,
+    LoginTitle
 } from './style'
 
-import { Button, createMuiTheme, TextField, createTheme, ThemeProvider} from "@mui/material";
-import { create } from "@mui/material/styles/createTransitions";
-import { light } from "@mui/material/styles/createPalette";
+import { Button, TextField, createTheme, ThemeProvider, Link, InputAdornment} from "@mui/material";
+import { AccountCircle, Phone } from "@mui/icons-material";
 
 
 export const LoginModal = ({openModal, setopenModal}) => {
@@ -18,21 +18,34 @@ export const LoginModal = ({openModal, setopenModal}) => {
             },
             secondary: {
                 main: '#f50057'
-            }
+            },
         }
     }) 
 
+    
     return (
         <>
             {openModal ? 
            
            <LoginDiv>
-                <ThemeProvider theme={theme}>
-                    <TextField label="Nome" type="text" id="" variant="outlined" />
-                    <TextField label="Email" type="email" id="" variant="outlined" />
-                    <TextField label="Senha" type="password" id="" variant="outlined" />
-                    <TextField label="Repita a senha" type="password" id="" variant="outlined" />
-                </ThemeProvider>
+                <ThemeProvider  theme={theme}>
+                    <LoginTitle>Crie a sua conta</LoginTitle>
+                    <TextField p="2" label="Nome" type="text" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
+                        {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AccountCircle/>
+                                </InputAdornment>
+                            )
+                        }
+                    } />
+                    <TextField label="Email" type="email" id="" variant="outlined" style={{marginBottom: "1em"}}/>
+                    <TextField label="Telefone" type="tel" id="" variant="outlined" style={{marginBottom: "1em"}}/>
+                    <TextField label="Senha" type="password" id="" variant="outlined" style={{marginBottom: "1em"}}/>
+                    <TextField label="Repita a senha" type="password" id="" variant="outlined" style={{marginBottom: "1em"}}/>
+                    <Button fullWidth variant="contained" style={{fontWeight: "bold"}}>Criar conta</Button>
+                    <Link variant="body2" color="primary">Já possui uma conta? Faça o Login aqui.</Link>
+                 </ThemeProvider>
             </LoginDiv> 
             
             : null}
