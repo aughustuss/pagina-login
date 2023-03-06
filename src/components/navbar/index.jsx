@@ -1,3 +1,5 @@
+import { AddBusiness, ExpandLess, ExpandMore, Person } from "@mui/icons-material";
+import { ListItemButton, ListItemIcon, ListItemText, List, Collapse, ListItem } from "@mui/material";
 import React, {useState, useEffect, useRef} from "react"
 import { LoginModal } from "../loginmodal";
 import { RegisterModal } from "../registermodal";
@@ -7,12 +9,16 @@ import {
     Logo,
     Links,
     LinksMenu,
-    CloseBTN
+    CloseBTN,
+    DropdownMenu,
+    DropDownList,
+    DropDownItem
 } from "./style"
 
 
 export const Navbar = () => {
  
+    const [openList, setOpenList] = useState(false);
     const [openModalOne, setopenModalOne] = useState(false);    
     const [openModalTwo, setOpenModalTwo] = useState(false);
     const showModalOne = () => {
@@ -27,6 +33,10 @@ export const Navbar = () => {
         }
     }
 
+    const HandleClick = () => {
+        setOpenList(!openList);
+    }
+
     return (
         <>
             <Navigation>
@@ -35,7 +45,19 @@ export const Navbar = () => {
                     <LinksMenu>
                         <Links>Agendar horário</Links>
                         <Links>ver barbearias próximas</Links>
-                        <Links onClick={showModalOne}>criar uma conta</Links>
+                        <DropdownMenu>
+                            
+                            <Links onClick={HandleClick}> Criar conta </Links>
+                            { openList ?
+                            <DropDownList>
+                                <DropDownItem>Para mim</DropDownItem>
+                                <DropDownItem>Para minha barbearia</DropDownItem>
+                            </DropDownList>
+                            : null }
+                        </DropdownMenu>
+                        
+
+
                         <Links onClick={showModalTwo}>fazer login</Links>
                     </LinksMenu>
                 </Nav>

@@ -15,7 +15,7 @@ export const Nav = styled.nav`
     background-color: transparent;
     display: flex;
     height: 100px;
-    flex-direction: row;
+    
 
 `
 
@@ -44,7 +44,7 @@ export const Links = styled(Link)`
     font-size: 13px;
     color: #fff;
     font-weight: 200;
-    padding: 1rem 1rem 1rem 1.5rem;
+    padding: 1rem;
 
     &::after{
         content: "";
@@ -68,5 +68,24 @@ export const CloseBTN = styled.span`
     float: right;
     font-weight: bold;
     color: black;
+
+`
+
+export const DropdownMenu = styled.section`
+    
+    display: flex;
+    justify-content: center;
+`
+
+export const DropDownList = styled.ul`
+
+    text-decoration: none;
+    
+
+`
+
+export const DropDownItem = styled.li`
+
+    display: flex;
 
 `

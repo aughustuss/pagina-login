@@ -33,6 +33,14 @@ export const RegisterTitle = styled.h2`
     text-transform: uppercase;
 
 `
+
+export const RegisterName = styled.div`
+    
+    display: flex;
+    flex-direction: row;
+
+`
+
 export const CloseBTN = styled.span`
     
     position: absolute;

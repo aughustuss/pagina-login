@@ -2,6 +2,7 @@ import React from "react";
 import {
     RegisterDiv,
     RegisterTitle,
+    RegisterName,
     CloseBTN,
     AccLink,
     RegisterSpan
@@ -35,16 +36,34 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                 
                 
                 <ThemeProvider  theme={theme}>
-                    <TextField label="Nome" type="text" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
-                        {
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <AccountCircle/>
-                                </InputAdornment>
-                            )
-                        }
-                    } />
-                    <TextField label="Email" type="email" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
+                    <RegisterName style={{marginBottom: "1em"}}  >
+                        <TextField
+                        label="Nome" 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        variant="outlined"
+                    
+                         />
+
+                        <TextField
+                        label="Sobrenome"
+                        type="text"
+                        id="userlastname"
+                        name="userlastname"
+                        variant="outlined"
+                        
+                        />
+
+                    </RegisterName>
+                    <TextField 
+                    label="Email" 
+                    type="email" 
+                    id="useremail"
+                    name="useremail" 
+                    variant="outlined" 
+                    style={{marginBottom: "1em"}} 
+                    InputProps={
                         {
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -53,7 +72,14 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                             )
                         }
                     } />
-                    <TextField label="Telefone" type="tel" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
+                    <TextField 
+                    label="Telefone" 
+                    type="tel" 
+                    id="usertel"
+                    name="usertel" 
+                    variant="outlined" 
+                    style={{marginBottom: "1em"}} 
+                    InputProps={
                         {
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -62,7 +88,14 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                             )
                         }
                     } />
-                    <TextField label="Senha" type="password" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
+                    <TextField 
+                    label="Senha" 
+                    type="password" 
+                    id="userpassword1"
+                    name="userpassword1" 
+                    variant="outlined" 
+                    style={{marginBottom: "1em"}} 
+                    InputProps={
                         {
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -71,9 +104,19 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                             )
                         }
                     } />
-                    <TextField label="Repita a senha" type="password" id="" variant="outlined" style={{marginBottom: "1em"}}/>
+
+                    <TextField 
+                    label="Repita a senha" 
+                    type="password" 
+                    id="userpassword2"
+                    name="userpassword2" 
+                    variant="outlined" 
+                    style={{marginBottom: "1em"}}
+                    />
+
                     <Button type="submit" fullWidth variant="contained" style={{fontWeight: "bold", color: "white", marginBottom: "2em"}}>Criar conta</Button>
                     <AccLink >Já possui uma conta? Clique aqui.</AccLink>
+
                  </ThemeProvider>
             </RegisterDiv> 
             
