@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const LoginDiv = styled.form`
+export const RegisterDiv = styled.form`
     
-    height: 550px;
+    height: fit-content;
     width: 450px;
     background-color: #FFF;
     position: absolute;
@@ -15,8 +15,16 @@ export const LoginDiv = styled.form`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `
-export const LoginTitle = styled.h2`
+
+export const RegisterSpan = styled.span`
+
+    text-align: center;
+
+`
+
+export const RegisterTitle = styled.h2`
     
     text-align: center;
     color: black;
@@ -49,7 +57,7 @@ export const AccLink = styled(Link)`
     position: absolute;
     bottom: 0;
     right: 0;
-    margin: 1em 1em 2em 1em;
+    padding: 1em;
     text-decoration: none;
     font-size: 14px;
     color: black;

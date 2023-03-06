@@ -43,7 +43,7 @@ export const Links = styled(Link)`
     text-decoration: none;
     font-size: 13px;
     color: #fff;
-
+    font-weight: 200;
     padding: 1rem 1rem 1rem 1.5rem;
 
     &::after{

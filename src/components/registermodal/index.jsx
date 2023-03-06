@@ -1,13 +1,14 @@
 import React from "react";
 import {
-    LoginDiv,
-    LoginTitle,
+    RegisterDiv,
+    RegisterTitle,
     CloseBTN,
-    AccLink
+    AccLink,
+    RegisterSpan
 } from './style'
 
 import { Button, TextField, createTheme, ThemeProvider, Link, InputAdornment} from "@mui/material";
-import { AccountCircle, Mail, Password, Phone } from "@mui/icons-material";
+import { AccountCircle, Key, Mail, Phone, AccountBox } from "@mui/icons-material";
 
 
 export const RegisterModal = ({openModalOne, setopenModalOne}) => {
@@ -28,12 +29,13 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
         <>
             {openModalOne ? 
            
-           <LoginDiv>
-                <CloseBTN >X</CloseBTN>
+           <RegisterDiv>
+                <RegisterSpan><AccountBox style={{width: "28px", height: "28px"}}/></RegisterSpan>
+                <RegisterTitle>Crie a sua conta</RegisterTitle>
+                
+                
                 <ThemeProvider  theme={theme}>
-                    
-                    <LoginTitle>Crie a sua conta</LoginTitle>
-                    <TextField p="2" label="Nome" type="text" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
+                    <TextField label="Nome" type="text" id="" variant="outlined" style={{marginBottom: "1em"}} InputProps={
                         {
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -64,16 +66,16 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                         {
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <Password/>
+                                    <Key/>
                                 </InputAdornment>
                             )
                         }
                     } />
                     <TextField label="Repita a senha" type="password" id="" variant="outlined" style={{marginBottom: "1em"}}/>
-                    <Button fullWidth variant="contained" style={{fontWeight: "bold", color: "white"}}>Criar conta</Button>
+                    <Button type="submit" fullWidth variant="contained" style={{fontWeight: "bold", color: "white", marginBottom: "2em"}}>Criar conta</Button>
                     <AccLink >Já possui uma conta? Clique aqui.</AccLink>
                  </ThemeProvider>
-            </LoginDiv> 
+            </RegisterDiv> 
             
             : null}
         </>
