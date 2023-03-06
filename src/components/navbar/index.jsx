@@ -1,20 +1,20 @@
-import React, {useState} from "react"
-import { LoginModal } from "../loginmodal";
+import React, {useState, useEffect, useRef} from "react"
+import { RegisterModal } from "../registermodal";
 import { 
     Navigation,
     Nav,
     Logo,
     Links,
-    LinksMenu
+    LinksMenu,
+    CloseBTN
 } from "./style"
 
 
 export const Navbar = () => {
 
-    const [openModal, setopenModal] = useState(false);
-    
-    const showModal = () => {
-        setopenModal(prev => !prev);
+    const [openModalOne, setopenModalOne] = useState(false);    
+    const showModalOne = () => {
+        setopenModalOne(prev => !prev);
     }
 
     return (
@@ -25,14 +25,13 @@ export const Navbar = () => {
                     <LinksMenu>
                         <Links>Agendar horário</Links>
                         <Links>ver barbearias próximas</Links>
-                        <Links>criar uma conta</Links>
-                        <Links onClick={showModal}>fazer login</Links>
+                        <Links onClick={showModalOne}>criar uma conta</Links>
+                        <Links>fazer login</Links>
                     </LinksMenu>
                 </Nav>
             </Navigation>
-            <LoginModal openModal={openModal} setopenModal={setopenModal}>
-                
-            </LoginModal>
+            <RegisterModal openModalOne={openModalOne} setopenModalOne={setopenModalOne}/>
+
         </>
     )
 }

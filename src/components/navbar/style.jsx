@@ -41,9 +41,9 @@ export const Links = styled(Link)`
     
     text-transform: uppercase;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 13px;
     color: #fff;
-    font-weight: bolder;
+
     padding: 1rem 1rem 1rem 1.5rem;
 
     &::after{
@@ -59,5 +59,14 @@ export const Links = styled(Link)`
         width: 100%;
     }
 
+`
+
+export const CloseBTN = styled.span`
     
+    position: absolute;
+    display: inline;
+    float: right;
+    font-weight: bold;
+    color: black;
+
 `
