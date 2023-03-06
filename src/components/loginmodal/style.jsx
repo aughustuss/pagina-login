@@ -15,7 +15,7 @@ export const LoginDiv = styled.form`
     display: flex;
     flex-direction: column;
 `
-export const LoginTitle = styled.h3`
+export const LoginTitle = styled.h2`
     
     text-align: center;
     color: black;
