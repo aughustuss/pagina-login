@@ -1,17 +1,16 @@
-import { AddBusiness, ExpandLess, ExpandMore, Person } from "@mui/icons-material";
-import { ListItemButton, ListItemIcon, ListItemText, List, Collapse, ListItem } from "@mui/material";
 import React, {useState, useEffect, useRef} from "react"
-import { LoginModal } from "../loginmodal";
-import { RegisterModal } from "../registermodal";
+import { UserLogin } from "../userlogin";
+import { StoreRegister } from "../storeregister";
+import { AccountBox, AddBusiness } from "@mui/icons-material";
 import { 
     Navigation,
     Nav,
     Logo,
     Links,
     LinksMenu,
-    CloseBTN,
     DropdownMenu,
     DropDownList,
+    DropDownItemMenu,
     DropDownItem
 } from "./style"
 
@@ -21,15 +20,18 @@ export const Navbar = () => {
     const [openList, setOpenList] = useState(false);
     const [openModalOne, setopenModalOne] = useState(false);    
     const [openModalTwo, setOpenModalTwo] = useState(false);
+
     const showModalOne = () => {
         if(!openModalTwo){
             setopenModalOne(prev => !prev);
+            setOpenList(false);
         }
         
     }
     const showModalTwo = () => {
         if (!openModalOne) {
             setOpenModalTwo(prev => !prev)
+            setOpenList(false);
         }
     }
 
@@ -50,8 +52,15 @@ export const Navbar = () => {
                             <Links onClick={HandleClick}> Criar conta </Links>
                             { openList ?
                             <DropDownList>
-                                <DropDownItem>Para mim</DropDownItem>
-                                <DropDownItem>Para minha barbearia</DropDownItem>
+
+                                <DropDownItemMenu>
+                                    <AccountBox/><DropDownItem >Para mim</DropDownItem>
+                                </DropDownItemMenu>
+                                <DropDownItemMenu>
+                                    <AddBusiness/><DropDownItem onClick={showModalOne} >Para minha barbearia</DropDownItem>
+                                </DropDownItemMenu>
+                                
+
                             </DropDownList>
                             : null }
                         </DropdownMenu>
@@ -62,8 +71,9 @@ export const Navbar = () => {
                     </LinksMenu>
                 </Nav>
             </Navigation>
-            <RegisterModal openModalOne={openModalOne} setopenModalOne={setopenModalOne}/>
-            <LoginModal openModalTwo={openModalTwo} setOpenModalTwo={setOpenModalTwo}></LoginModal>
+
+            <StoreRegister openModalOne={openModalOne} setopenModalOne={setopenModalOne}/>
+            <UserLogin openModalTwo={openModalTwo} setOpenModalTwo={setOpenModalTwo}/>
         </>
     )
 }

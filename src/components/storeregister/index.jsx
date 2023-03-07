@@ -2,17 +2,17 @@ import React from "react";
 import {
     RegisterDiv,
     RegisterTitle,
-    RegisterName,
+    RegisterWrap,
     CloseBTN,
     AccLink,
     RegisterSpan
 } from './style'
 
 import { Button, TextField, createTheme, ThemeProvider, Link, InputAdornment} from "@mui/material";
-import { AccountCircle, Key, Mail, Phone, AccountBox } from "@mui/icons-material";
+import { Key, Mail, Phone, AccountBox, Store, LocalOffer } from "@mui/icons-material";
 
 
-export const RegisterModal = ({openModalOne, setopenModalOne}) => {
+export const StoreRegister = ({openModalOne, setopenModalOne}) => {
 
     const theme = createTheme({
         palette:{
@@ -36,12 +36,12 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                 
                 
                 <ThemeProvider  theme={theme}>
-                    <RegisterName style={{marginBottom: "1em"}}  >
+                    <RegisterWrap style={{marginBottom: "1em"}}  >
                         <TextField
                         label="Nome" 
                         type="text" 
-                        id="username" 
-                        name="username" 
+                        id="storename" 
+                        name="storename" 
                         variant="outlined"
                     
                          />
@@ -49,18 +49,18 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                         <TextField
                         label="Sobrenome"
                         type="text"
-                        id="userlastname"
-                        name="userlastname"
+                        id="storelastname"
+                        name="storelastname"
                         variant="outlined"
                         
                         />
 
-                    </RegisterName>
+                    </RegisterWrap>
                     <TextField 
                     label="Email" 
                     type="email" 
-                    id="useremail"
-                    name="useremail" 
+                    id="storeemail"
+                    name="storeemail" 
                     variant="outlined" 
                     style={{marginBottom: "1em"}} 
                     InputProps={
@@ -75,8 +75,8 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                     <TextField 
                     label="Telefone" 
                     type="tel" 
-                    id="usertel"
-                    name="usertel" 
+                    id="storetel"
+                    name="storetel" 
                     variant="outlined" 
                     style={{marginBottom: "1em"}} 
                     InputProps={
@@ -88,11 +88,68 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                             )
                         }
                     } />
+
+                    <TextField
+                    label="Endereço"
+                    type="text"
+                    id="storelocation"
+                    name="storelocation"
+                    variant="outlined"
+                    style={{marginBottom: "2em"}}
+                    InputProps={
+                        {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Store/>
+                                </InputAdornment>
+                            )                                
+                        }
+                    }
+                    />
+
+                    <RegisterWrap style={{marginBottom: "2em"}}>
+
+                    <TextField
+                    label="Número"
+                    type="text"
+                    id="storenumber"
+                    name="storenumber"
+                    variant="outlined"
+                    InputProps={
+                        {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <LocalOffer/>
+                                </InputAdornment>
+                            )
+                        }
+                    }
+                    />
+
+                    <TextField
+                    label="Bairro"
+                    type="text"
+                    id="storeadress"
+                    name="storeadress"
+                    variant="outlined"
+                    InputProps={
+                        {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Store/>
+                                </InputAdornment>
+                            )
+                        }
+                    }
+                    />
+
+                    </RegisterWrap>
+
                     <TextField 
                     label="Senha" 
                     type="password" 
-                    id="userpassword1"
-                    name="userpassword1" 
+                    id="storepassword1"
+                    name="storepassword1" 
                     variant="outlined" 
                     style={{marginBottom: "1em"}} 
                     InputProps={
@@ -108,8 +165,8 @@ export const RegisterModal = ({openModalOne, setopenModalOne}) => {
                     <TextField 
                     label="Repita a senha" 
                     type="password" 
-                    id="userpassword2"
-                    name="userpassword2" 
+                    id="storepassword2"
+                    name="storepassword2" 
                     variant="outlined" 
                     style={{marginBottom: "1em"}}
                     />

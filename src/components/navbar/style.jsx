@@ -39,11 +39,11 @@ export const LinksMenu = styled.div`
 
 export const Links = styled(Link)`
     
-    text-transform: uppercase;
+    text-transform: capitalize;
     text-decoration: none;
     font-size: 13px;
     color: #fff;
-    font-weight: 200;
+    font-weight: 500;
     padding: 1rem;
 
     &::after{
@@ -61,31 +61,42 @@ export const Links = styled(Link)`
 
 `
 
-export const CloseBTN = styled.span`
-    
-    position: absolute;
-    display: inline;
-    float: right;
-    font-weight: bold;
-    color: black;
-
-`
-
-export const DropdownMenu = styled.section`
+export const DropdownMenu = styled.div`
     
     display: flex;
-    justify-content: center;
+    
 `
 
 export const DropDownList = styled.ul`
+    position: absolute;
+    color: white;
+    font-size: 13px;
+    text-transform: capitalize;
+    text-align: start;
+    top: 5em;
+    margin-left: 5px;
+    padding: 0;
 
-    text-decoration: none;
+`
+
+
+export const DropDownItemMenu = styled.div`
     
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
 `
 
 export const DropDownItem = styled.li`
 
-    display: flex;
+    text-decoration: none;
+    list-style: none;
+    padding: 1em;
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
 
 `

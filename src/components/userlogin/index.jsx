@@ -10,7 +10,7 @@ import {
 import { TextField, createTheme, ThemeProvider, InputAdornment, Button } from "@mui/material";
 import { Key, Login, Mail } from "@mui/icons-material";
 
-export const LoginModal = ({openModalTwo, setOpenModalTwo}) => {
+export const UserLogin = ({openModalTwo, setOpenModalTwo}) => {
     const theme = createTheme({
         palette:{
             mode: 'light',
