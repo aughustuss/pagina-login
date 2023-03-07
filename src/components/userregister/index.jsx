@@ -5,7 +5,9 @@ import {
     RegisterName,
     CloseBTN,
     AccLink,
-    RegisterSpan
+    RegisterSpan,
+    LoadingDiv,
+    Loading
 } from './style'
 
 import { Button, TextField, createTheme, ThemeProvider, InputAdornment} from "@mui/material";
@@ -28,7 +30,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
         }
     }) 
 
-    const {values, errors, handleChange, handleSubmit} = useFormik({
+    const {values, errors, handleChange, handleSubmit, isSubmitting} = useFormik({
         initialValues: {
             username: "",
             userlastname: "",
@@ -102,6 +104,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
                     variant="outlined" 
                     value={values.usertel}
                     onChange={handleChange}
+                    helperText={errors.usertel && errors.usertel}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -119,6 +122,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
                     name="userpassword1" 
                     variant="outlined" 
                     value={values.userpassword1}
+                    helperText={errors.userpassword1 && errors.userpassword1}
                     onChange={handleChange}
                     style={{marginBottom: "1em"}} 
                     InputProps={
@@ -139,10 +143,11 @@ export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
                     variant="outlined" 
                     value={values.userpassword2}
                     onChange={handleChange}
+                    helperText={errors.userpassword2 && errors.userpassword2}
                     style={{marginBottom: "1em"}}
                     />
 
-                    <Button type="submit" fullWidth variant="contained" style={{fontWeight: "bold", color: "white", marginBottom: "2em"}}>Criar conta</Button>
+                    <Button type="submit" fullWidth variant="contained" style={{fontWeight: "bold", color: "white", marginBottom: "2em"}}> {!isSubmitting ? 'Criar Conta' : <LoadingDiv>Enviando <Loading/></LoadingDiv> }</Button>
                     <AccLink >Já possui uma conta? Clique aqui.</AccLink>
 
                  </ThemeProvider>

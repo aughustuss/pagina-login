@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const RegisterDiv = styled.form`
@@ -75,3 +75,29 @@ export const AccLink = styled(Link)`
         cursor: pointer;
     }
 `
+
+export const LoadingDiv = styled.div`
+    
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+`
+
+export const Loading= styled.span`
+
+    margin-left: 5px;
+    display: flex;
+    width: 10px;
+    height: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+
+    @keyframes spin {
+        to {transform: rotate(360deg)}
+    }
+
+`
+

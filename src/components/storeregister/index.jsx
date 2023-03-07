@@ -8,9 +8,10 @@ import {
     RegisterSpan
 } from './style'
 
+import { useFormik } from "formik";
 import { Button, TextField, createTheme, ThemeProvider, Link, InputAdornment} from "@mui/material";
 import { Key, Mail, Phone, AccountBox, Store, LocalOffer, Badge } from "@mui/icons-material";
-
+import { storeSchema } from "../../validations/storeregister";
 
 export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
 
@@ -26,11 +27,26 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
         }
     }) 
 
+    const {values, handleChange, isSubmitting, errors, handleSubmit} = useFormik({
+        initialValues:{
+            storename: "",
+            storelastname: "",
+            storeemail: "",
+            storetel: "",
+            storelocation: "",
+            storenumber: "",
+            storeadress: "",
+            storepassword1: "",
+            storepassword2: ""
+        },
+        validationSchema: storeSchema,
+    })
+
     return (
         <>
             {openModalThree ? 
            
-           <RegisterDiv>
+           <RegisterDiv onSubmit={handleSubmit}>
                 <RegisterSpan><AccountBox style={{width: "28px", height: "28px"}}/></RegisterSpan>
                 <RegisterTitle>Crie a sua conta</RegisterTitle>
                 
@@ -43,6 +59,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                         id="storename" 
                         name="storename" 
                         variant="outlined"
+                        value={values.storename}
+                        onChange={handleChange}
+                        helperText={errors.storename && errors.storename}
                         style={{marginRight: "1em"}}
                         InputProps={
                             {
@@ -61,13 +80,20 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                         id="storelastname"
                         name="storelastname"
                         variant="outlined"
-                        
+                        value={values.storelastname}
+                        onChange={handleChange}
+                        helperText={errors.storelastname && errors.storelastname}
                         />
 
                     </RegisterWrap>
 
                     <TextField
                     label="Nome da Barbearia"
+                    type="text"
+                    id="storefullname"
+                    name="storefullname"
+                    variant="outlined"
+                    
                     style={{marginBottom: "1em"}}
                     />
 
@@ -77,6 +103,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storeemail"
                     name="storeemail" 
                     variant="outlined" 
+                    value={values.storeemail}
+                    onChange={handleChange}
+                    helperText={errors.storeemail && errors.storeemail}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -93,6 +122,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storetel"
                     name="storetel" 
                     variant="outlined" 
+                    value={values.storetel}
+                    onChange={handleChange}
+                    helperText={errors.storetel && errors.storetel}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -110,6 +142,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storelocation"
                     name="storelocation"
                     variant="outlined"
+                    value={values.storelocation}
+                    onChange={handleChange}
+                    helperText={errors.storelocation && errors.storelocation}
                     style={{marginBottom: "1em"}}
                     InputProps={
                         {
@@ -130,6 +165,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storenumber"
                     name="storenumber"
                     variant="outlined"
+                    value={values.storenumber}
+                    onChange={handleChange}
+                    helperText={errors.storenumber && errors.storenumber}
                     style={{marginRight: "1em"}}
                     InputProps={
                         {
@@ -148,6 +186,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storeadress"
                     name="storeadress"
                     variant="outlined"
+                    value={values.storeadress}
+                    onChange={handleChange}
+                    helperText={errors.storeadress && errors.storeadress}
                     InputProps={
                         {
                             startAdornment: (
@@ -167,6 +208,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storepassword1"
                     name="storepassword1" 
                     variant="outlined" 
+                    value={values.storepassword1}
+                    onChange={handleChange}
+                    helperText={errors.storepassword1 && errors.storepassword1}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -184,6 +228,9 @@ export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
                     id="storepassword2"
                     name="storepassword2" 
                     variant="outlined" 
+                    value={values.storepassword2}
+                    onChange={handleChange}
+                    helperText={errors.storepassword2 && errors.storepassword2}
                     style={{marginBottom: "1em"}}
                     />
 

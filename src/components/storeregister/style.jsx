@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const RegisterDiv = styled.form`
     
-    height: fit-content;
+    max-height: 100vh;
     width: 450px;
     background-color: #FFF;
     position: absolute;
