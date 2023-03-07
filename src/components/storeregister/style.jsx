@@ -29,7 +29,7 @@ export const RegisterTitle = styled.h2`
     text-align: center;
     color: black;
     font-weight: bold;
-    margin-bottom: 1em;
+    margin-bottom: .5em;
     text-transform: uppercase;
 
 `

@@ -8,11 +8,13 @@ import {
     RegisterSpan
 } from './style'
 
-import { Button, TextField, createTheme, ThemeProvider, Link, InputAdornment} from "@mui/material";
-import { AccountCircle, Key, Mail, Phone, AccountBox } from "@mui/icons-material";
+import { Button, TextField, createTheme, ThemeProvider, InputAdornment} from "@mui/material";
+import { Key, Mail, Phone, AccountBox } from "@mui/icons-material";
+import { Formik, useFormik } from "formik";
+import { registerSchema } from "../../validations/userregister";
 
 
-export const UserRegister = ({openModalOne, setopenModalOne}) => {
+export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
 
     const theme = createTheme({
         palette:{
@@ -26,11 +28,24 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
         }
     }) 
 
+    const {values, errors, handleChange, handleSubmit} = useFormik({
+        initialValues: {
+            username: "",
+            userlastname: "",
+            useremail: "",
+            usertel: "",
+            userpassword1: "",
+            userpassword2: ""
+        },
+        validationSchema: registerSchema, 
+    });
+
+
     return (
         <>
-            {openModalOne ? 
+            {openModalTwo ? 
            
-           <RegisterDiv>
+           <RegisterDiv onSubmit={handleSubmit}>
                 <RegisterSpan><AccountBox style={{width: "28px", height: "28px"}}/></RegisterSpan>
                 <RegisterTitle>Crie a sua conta</RegisterTitle>
                 
@@ -43,7 +58,10 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
                         id="username" 
                         name="username" 
                         variant="outlined"
-                    
+                        value={values.username}
+                        onChange={handleChange}
+                        helperText={errors.username && errors.username}
+                        style={{marginRight: "1em"}}
                          />
 
                         <TextField
@@ -52,7 +70,8 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
                         id="userlastname"
                         name="userlastname"
                         variant="outlined"
-                        
+                        value={values.userlastname}
+                        onChange={handleChange}
                         />
 
                     </RegisterName>
@@ -62,6 +81,9 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
                     id="useremail"
                     name="useremail" 
                     variant="outlined" 
+                    value={values.useremail}
+                    onChange={handleChange}
+                    helperText={errors.useremail && errors.useremail}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -78,6 +100,8 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
                     id="usertel"
                     name="usertel" 
                     variant="outlined" 
+                    value={values.usertel}
+                    onChange={handleChange}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -94,6 +118,8 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
                     id="userpassword1"
                     name="userpassword1" 
                     variant="outlined" 
+                    value={values.userpassword1}
+                    onChange={handleChange}
                     style={{marginBottom: "1em"}} 
                     InputProps={
                         {
@@ -111,6 +137,8 @@ export const UserRegister = ({openModalOne, setopenModalOne}) => {
                     id="userpassword2"
                     name="userpassword2" 
                     variant="outlined" 
+                    value={values.userpassword2}
+                    onChange={handleChange}
                     style={{marginBottom: "1em"}}
                     />
 

@@ -9,10 +9,10 @@ import {
 } from './style'
 
 import { Button, TextField, createTheme, ThemeProvider, Link, InputAdornment} from "@mui/material";
-import { Key, Mail, Phone, AccountBox, Store, LocalOffer } from "@mui/icons-material";
+import { Key, Mail, Phone, AccountBox, Store, LocalOffer, Badge } from "@mui/icons-material";
 
 
-export const StoreRegister = ({openModalOne, setopenModalOne}) => {
+export const StoreRegister = ({openModalThree, setOpenModalThree}) => {
 
     const theme = createTheme({
         palette:{
@@ -28,7 +28,7 @@ export const StoreRegister = ({openModalOne, setopenModalOne}) => {
 
     return (
         <>
-            {openModalOne ? 
+            {openModalThree ? 
            
            <RegisterDiv>
                 <RegisterSpan><AccountBox style={{width: "28px", height: "28px"}}/></RegisterSpan>
@@ -43,7 +43,16 @@ export const StoreRegister = ({openModalOne, setopenModalOne}) => {
                         id="storename" 
                         name="storename" 
                         variant="outlined"
-                    
+                        style={{marginRight: "1em"}}
+                        InputProps={
+                            {
+                                startAdornment: (
+                                    <InputAdornment>
+                                        <Badge/>
+                                    </InputAdornment>
+                                )
+                            }
+                        }
                          />
 
                         <TextField
@@ -56,6 +65,12 @@ export const StoreRegister = ({openModalOne, setopenModalOne}) => {
                         />
 
                     </RegisterWrap>
+
+                    <TextField
+                    label="Nome da Barbearia"
+                    style={{marginBottom: "1em"}}
+                    />
+
                     <TextField 
                     label="Email" 
                     type="email" 
@@ -95,7 +110,7 @@ export const StoreRegister = ({openModalOne, setopenModalOne}) => {
                     id="storelocation"
                     name="storelocation"
                     variant="outlined"
-                    style={{marginBottom: "2em"}}
+                    style={{marginBottom: "1em"}}
                     InputProps={
                         {
                             startAdornment: (
@@ -107,7 +122,7 @@ export const StoreRegister = ({openModalOne, setopenModalOne}) => {
                     }
                     />
 
-                    <RegisterWrap style={{marginBottom: "2em"}}>
+                    <RegisterWrap style={{marginBottom: "1em"}}>
 
                     <TextField
                     label="Número"
@@ -115,6 +130,7 @@ export const StoreRegister = ({openModalOne, setopenModalOne}) => {
                     id="storenumber"
                     name="storenumber"
                     variant="outlined"
+                    style={{marginRight: "1em"}}
                     InputProps={
                         {
                             startAdornment: (

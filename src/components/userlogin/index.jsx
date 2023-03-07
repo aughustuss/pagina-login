@@ -10,7 +10,7 @@ import {
 import { TextField, createTheme, ThemeProvider, InputAdornment, Button } from "@mui/material";
 import { Key, Login, Mail } from "@mui/icons-material";
 
-export const UserLogin = ({openModalTwo, setOpenModalTwo}) => {
+export const UserLogin = ({openModalOne, setOpenModalOne}) => {
     const theme = createTheme({
         palette:{
             mode: 'light',
@@ -24,7 +24,7 @@ export const UserLogin = ({openModalTwo, setOpenModalTwo}) => {
     }) 
     return (
         <>
-        {openModalTwo ? 
+        {openModalOne ? 
             <LoginDiv>
                 
                 <LoginSpan><Login style={{width: "28px", height: "28px"}} /></LoginSpan>

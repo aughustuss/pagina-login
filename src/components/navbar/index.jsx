@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
 import { UserLogin } from "../userlogin";
 import { StoreRegister } from "../storeregister";
+import { UserRegister } from "../userregister"
 import { AccountBox, AddBusiness } from "@mui/icons-material";
 import { 
     Navigation,
@@ -18,19 +19,28 @@ import {
 export const Navbar = () => {
  
     const [openList, setOpenList] = useState(false);
-    const [openModalOne, setopenModalOne] = useState(false);    
+
+    const [openModalOne, setOpenModalOne] = useState(false);    
     const [openModalTwo, setOpenModalTwo] = useState(false);
+    const [openModalThree, setOpenModalThree] = useState(false);
 
     const showModalOne = () => {
-        if(!openModalTwo){
-            setopenModalOne(prev => !prev);
+        if(!openModalTwo && !openModalThree ){
+            setOpenModalOne(prev => !prev);
             setOpenList(false);
         }
         
     }
     const showModalTwo = () => {
-        if (!openModalOne) {
+        if (!openModalOne && !openModalThree ) {
             setOpenModalTwo(prev => !prev)
+            setOpenList(false);
+        }
+    }
+
+    const showModalThree = () => {
+        if(!openModalTwo && !openModalOne) {
+            setOpenModalThree(prev => !prev)
             setOpenList(false);
         }
     }
@@ -54,26 +64,26 @@ export const Navbar = () => {
                             <DropDownList>
 
                                 <DropDownItemMenu>
-                                    <AccountBox/><DropDownItem >Para mim</DropDownItem>
+                                    <AccountBox/><DropDownItem onClick={showModalTwo} >Para mim</DropDownItem>
                                 </DropDownItemMenu>
                                 <DropDownItemMenu>
-                                    <AddBusiness/><DropDownItem onClick={showModalOne} >Para minha barbearia</DropDownItem>
+                                    <AddBusiness/><DropDownItem onClick={showModalThree} >Para minha barbearia</DropDownItem>
                                 </DropDownItemMenu>
                                 
-
                             </DropDownList>
                             : null }
                         </DropdownMenu>
                         
 
 
-                        <Links onClick={showModalTwo}>fazer login</Links>
+                        <Links onClick={showModalOne}>fazer login</Links>
                     </LinksMenu>
                 </Nav>
             </Navigation>
-
-            <StoreRegister openModalOne={openModalOne} setopenModalOne={setopenModalOne}/>
-            <UserLogin openModalTwo={openModalTwo} setOpenModalTwo={setOpenModalTwo}/>
+            
+            <UserLogin openModalOne={openModalOne} setOpenModalOne={setOpenModalOne}/>
+            <UserRegister openModalTwo={openModalTwo} setopenModalTwo={setOpenModalTwo} />
+            <StoreRegister openModalThree={openModalThree} setOpenModalThree={setOpenModalThree} />
         </>
     )
 }
