@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
     LoginSpan,
     LoginDiv,
@@ -10,7 +10,7 @@ import {
 import { TextField, createTheme, ThemeProvider, InputAdornment, Button } from "@mui/material";
 import { Key, Login, Mail } from "@mui/icons-material";
 
-export const UserLogin = ({openModalOne, setOpenModalOne}) => {
+export const UserLogin = ({openModalOne, setOpenModalOne, closemodal}) => {
     const theme = createTheme({
         palette:{
             mode: 'light',
@@ -22,16 +22,27 @@ export const UserLogin = ({openModalOne, setOpenModalOne}) => {
             },
         }
     }) 
+
+
     return (
         <>
         {openModalOne ? 
             <LoginDiv>
                 
-                <LoginSpan><Login style={{width: "28px", height: "28px"}} /></LoginSpan>
+                <CloseBTN onClick={() => {
+                    setOpenModalOne(false);
+                }} >X</CloseBTN>
+                <LoginSpan><Login style={{width: "42px", height: "42px"}} /></LoginSpan>
                 <LoginTitle>Faça o seu Login</LoginTitle>
 
                 <ThemeProvider theme={theme}>
-                   <TextField style={{marginBottom: "2em"}} label="Email" type="email" InputProps={
+                   <TextField 
+                   style={{marginBottom: "2em"}} 
+                   label="Email" 
+                   type="email" 
+                   id="logineamil"
+                   name="loginemail"
+                   InputProps={
                     {
                         startAdornment: (
                             <InputAdornment position="start">
@@ -40,7 +51,13 @@ export const UserLogin = ({openModalOne, setOpenModalOne}) => {
                         )
                     }
                    } />
-                   <TextField style={{marginBottom: "2em"}} label="Senha" type="password" id="" InputProps={
+                   <TextField 
+                   style={{marginBottom: "2em"}} 
+                   label="Senha" 
+                   type="password" 
+                   id="loginpassword"
+                   name="loginpassword" 
+                   InputProps={
                     {
                         startAdornment: (
                             <InputAdornment position="start">
@@ -50,7 +67,9 @@ export const UserLogin = ({openModalOne, setOpenModalOne}) => {
                     }
                    } />
                    <Button fullWidth variant="contained" style={{color: "white", fontWeight: "bold", marginBottom: "2em"}} >Entrar</Button>
-                   <AccLink>Ainda não possui uma conta? Crie uma aqui.</AccLink>
+                   <AccLink  onClick={() => {
+                        closemodal(false);
+                   }} >Ainda não possui uma conta? Crie uma aqui.</AccLink>
                 </ThemeProvider>
             </LoginDiv>
         : null }

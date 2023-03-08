@@ -16,7 +16,7 @@ import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
 
 
-export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
+export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
 
     const theme = createTheme({
         palette:{
@@ -48,7 +48,10 @@ export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
             {openModalTwo ? 
            
            <RegisterDiv onSubmit={handleSubmit}>
-                <RegisterSpan><AccountBox style={{width: "28px", height: "28px"}}/></RegisterSpan>
+                <CloseBTN onClick={() => {
+                    setopenModalTwo(false);                   
+                }} >X</CloseBTN>
+                <RegisterSpan><AccountBox style={{width: "42px", height: "42px"}}/></RegisterSpan>
                 <RegisterTitle>Crie a sua conta</RegisterTitle>
                 
                 
@@ -148,7 +151,10 @@ export const UserRegister = ({openModalTwo, setopenModalTwo}) => {
                     />
 
                     <Button type="submit" fullWidth variant="contained" style={{fontWeight: "bold", color: "white", marginBottom: "2em"}}> {!isSubmitting ? 'Criar Conta' : <LoadingDiv>Enviando <Loading/></LoadingDiv> }</Button>
-                    <AccLink >Já possui uma conta? Clique aqui.</AccLink>
+                    <AccLink onClick={() => {
+                        closeRegisterModal(false);
+                        openLoginModal(true);
+                    }}>Já possui uma conta? Clique aqui.</AccLink>
 
                  </ThemeProvider>
             </RegisterDiv> 

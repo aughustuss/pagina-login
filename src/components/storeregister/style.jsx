@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const RegisterDiv = styled.form`
     
     max-height: 100vh;
-    width: 450px;
+    width: 750px;
     background-color: #FFF;
     position: absolute;
     left: 50%;
@@ -16,6 +16,27 @@ export const RegisterDiv = styled.form`
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+`
+
+export const MainDiv = styled.div`
+    
+    flex-direction: row;
+    display: flex;
+
+`
+
+export const LeftDiv = styled.div`
+    margin-right: 1em;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+
+`
+
+export const RightDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 `
 
 export const RegisterSpan = styled.span`

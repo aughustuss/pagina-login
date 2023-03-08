@@ -32,14 +32,15 @@ export const Navbar = () => {
         
     }
     const showModalTwo = () => {
-        if (!openModalOne && !openModalThree ) {
+        if(!openModalThree && !openModalOne){
             setOpenModalTwo(prev => !prev)
             setOpenList(false);
         }
+
     }
 
     const showModalThree = () => {
-        if(!openModalTwo && !openModalOne) {
+        if(!openModalTwo && !openModalOne){
             setOpenModalThree(prev => !prev)
             setOpenList(false);
         }
@@ -81,9 +82,9 @@ export const Navbar = () => {
                 </Nav>
             </Navigation>
             
-            <UserLogin openModalOne={openModalOne} setOpenModalOne={setOpenModalOne}/>
-            <UserRegister openModalTwo={openModalTwo} setopenModalTwo={setOpenModalTwo} />
-            <StoreRegister openModalThree={openModalThree} setOpenModalThree={setOpenModalThree} />
+            <UserLogin closemodal={setOpenModalOne} openModalOne={openModalOne} setOpenModalOne={setOpenModalOne}/>
+            <UserRegister openLoginModal={setOpenModalOne} closeRegisterModal={setOpenModalTwo} openModalTwo={openModalTwo} setopenModalTwo={setOpenModalTwo} />
+            <StoreRegister closeStoreModal={setOpenModalThree} openLoginModal={setOpenModalOne} openModalThree={openModalThree} setOpenModalThree={setOpenModalThree} />
         </>
     )
 }
