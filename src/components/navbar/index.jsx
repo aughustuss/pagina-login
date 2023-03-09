@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useRef} from "react"
+import React, {useEffect, useState} from "react"
+import { useLocation } from "react-router-dom";
 import { UserLogin } from "../userlogin";
 import { StoreRegister } from "../storeregister";
 import { UserRegister } from "../userregister"
@@ -23,6 +24,18 @@ import { SideBar } from "../sidebar";
 
 export const Navbar = () => {
  
+    const location = useLocation();
+    const [navBg, setnavBg] = useState("transparent");
+
+    useEffect(() => {
+        if(window.location.pathname === '/appointment'){
+            setnavBg("black");
+        } 
+        else {
+            setnavBg("transparent")
+        }
+    })
+
     const [openList, setOpenList] = useState(false);
 
     const [openModalOne, setOpenModalOne] = useState(false);    
@@ -65,13 +78,13 @@ export const Navbar = () => {
 
     return (
         <>
-            <Navigation>
+            <Navigation style={{backgroundColor: navBg}}>
                 <Nav>
-                    <LogoDiv>
-                        <Logo src={barber}/>
+                    <LogoDiv to="/">
+                        <Logo alt="Brasil Barber's" src={barber}/>
                     </LogoDiv>
                     <LinksMenu>
-                        <Links>Agendar horário</Links>
+                        <Links to="/appointment">Agendar horário</Links>
                         <Links>ver barbearias próximas</Links>
                         <DropdownMenu>
                             

@@ -10,16 +10,12 @@ export const Navigation = styled.header`
 `
 
 export const Nav = styled.nav`
-
-    background-color: transparent;
     display: flex;
     height: 100px;
-    
-
 `
 
-export const LogoDiv=styled.div`
-    
+export const LogoDiv=styled(Link)`
+    text-decoration: none;
     display: flex;
     align-items: center;
     flex-grow: 1;
