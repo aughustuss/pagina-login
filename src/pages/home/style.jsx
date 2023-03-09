@@ -6,6 +6,11 @@ export const HomePage = styled.div`
     height: 100%;
     padding-top: 100px;
     background: url(${BackGroundImg});
-    background-size: contain;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    @media screen and (max-width: 768px) {
+        
+    }
 
 `

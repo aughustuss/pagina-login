@@ -108,3 +108,30 @@ export const DropDownItem = styled.li`
     }
 
 `
+
+export const CollapseNavbar = styled.div`
+    
+    display: none;
+    margin-right: 1rem;
+    z-index: 101;
+    @media screen and (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+
+`
+
+export const MenuIconDiv = styled.div`
+    
+    border-radius: 4px;
+
+    &:hover{
+        background-color: rgba(194, 194, 194, 0.205);
+        transition: .5s all ease-in-out;
+        cursor: pointer;
+    }
+
+`
