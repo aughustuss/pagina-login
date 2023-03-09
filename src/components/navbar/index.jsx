@@ -3,10 +3,12 @@ import { UserLogin } from "../userlogin";
 import { StoreRegister } from "../storeregister";
 import { UserRegister } from "../userregister"
 import { AccountBox, AddBusiness } from "@mui/icons-material";
+import barber from '../../assets/brasilbarbers.png'
 import { 
     Navigation,
     Nav,
     Logo,
+    LogoDiv,
     Links,
     LinksMenu,
     DropdownMenu,
@@ -54,7 +56,9 @@ export const Navbar = () => {
         <>
             <Navigation>
                 <Nav>
-                    <Logo>Brasil Barber's</Logo>
+                    <LogoDiv>
+                        <Logo src={barber}/>
+                    </LogoDiv>
                     <LinksMenu>
                         <Links>Agendar horário</Links>
                         <Links>ver barbearias próximas</Links>

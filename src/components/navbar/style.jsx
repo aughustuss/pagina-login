@@ -2,12 +2,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Navigation = styled.header`
-    
     width: 100%;
     z-index: 100;
     top: 0;
     left: 0;
-    position: initial;
+    position: fixed;
 `
 
 export const Nav = styled.nav`
@@ -19,15 +18,19 @@ export const Nav = styled.nav`
 
 `
 
-export const Logo = styled.div`
+export const LogoDiv=styled.div`
+    
     display: flex;
-    flex-grow: 1;
-    color: #fff;
     align-items: center;
+    flex-grow: 1;
+
+`
+
+export const Logo = styled.img`
+    display: flex;
     padding: 1rem;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
+    width: 210px;
+    height: 90%;
 `
 
 export const LinksMenu = styled.div`
@@ -35,15 +38,20 @@ export const LinksMenu = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    };
+    
 `
 
 export const Links = styled(Link)`
     
     text-transform: capitalize;
+    
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     color: #fff;
-    font-weight: 500;
     padding: 1rem;
 
     &::after{
