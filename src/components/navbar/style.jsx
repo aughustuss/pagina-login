@@ -93,7 +93,13 @@ export const DropDownItemMenu = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    padding: .3rem;
+    &:hover{
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            transition: .5s all ease-in-out;
+        }
 `
 
 export const DropDownItem = styled.li`
@@ -101,11 +107,6 @@ export const DropDownItem = styled.li`
     text-decoration: none;
     list-style: none;
     padding: 1em;
-
-    &:hover{
-        cursor: pointer;
-        background-color: rgba(0, 0, 0, 0.9);
-    }
 
 `
 
