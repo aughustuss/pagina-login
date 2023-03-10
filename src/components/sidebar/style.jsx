@@ -8,7 +8,7 @@ export const SideBarDiv = styled.div`
     display: flex;
     height: 100vh;
     width: 30%;
-    background-color: rgb(0,0,10);
+    background-color: #111111;
     font-size: 13px;
     
 `

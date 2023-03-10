@@ -11,7 +11,7 @@ export const Navigation = styled.header`
 
 export const Nav = styled.nav`
     display: flex;
-    height: 100px;
+    height: 90px;
 `
 
 export const LogoDiv=styled(Link)`

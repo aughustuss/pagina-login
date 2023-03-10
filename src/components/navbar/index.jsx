@@ -29,7 +29,7 @@ export const Navbar = () => {
 
     useEffect(() => {
         if(window.location.pathname === '/appointment'){
-            setnavBg("black");
+            setnavBg("#111111");
         } 
         else {
             setnavBg("transparent")
@@ -50,7 +50,6 @@ export const Navbar = () => {
     const [openModalTwo, setOpenModalTwo] = useState(false);
     const [openModalThree, setOpenModalThree] = useState(false);
     const [openSideBar, setOpenSideBar] = useState(false);
-    const [openSideBarList, setOpenSideBarList] = useState(false);
 
     const showModalOne = () => {
         if(!openModalTwo && !openModalThree ){
