@@ -14,6 +14,8 @@ import { Button, TextField, createTheme, ThemeProvider, InputAdornment} from "@m
 import { Key, Mail, Phone, AccountBox } from "@mui/icons-material";
 import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
+import e from "express";
+import axios from "axios";
 
 
 export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
@@ -39,7 +41,16 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
             userpassword1: "",
             userpassword2: ""
         },
-        validationSchema: registerSchema, 
+        validationSchema: registerSchema,
+
+        onSubmit: data => {
+            axios.post('localhost:3000/auth/register', data).then((res) => {
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+            
     });
 
 
