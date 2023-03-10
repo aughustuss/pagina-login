@@ -86,7 +86,9 @@ const loginUser = async(req,res) =>{
     const {accessToken,refreshToken} = generateTokens(user)
             
     //return access token and refresh token
-    return res.send({token : {accessToken,refreshToken}});
+    return res.send({
+        user:{id:user._id , name:user.firstname,email:email},
+        token : {accessToken,refreshToken}});
 
     }catch(err){
 
