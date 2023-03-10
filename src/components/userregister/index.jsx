@@ -44,9 +44,11 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
 
         onSubmit: data => {
             axios.post("http://localhost:8000/auth/register", data).then((res) => {
+                
                 console.log(res);
             }).catch((err) => {
                 console.log(err);
+                console.log(data);
             })
         }
             
