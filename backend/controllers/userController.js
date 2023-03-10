@@ -5,6 +5,9 @@ const RefreshToken = require('../models/refreshTokenModel');
 require('dotenv').config //load .env
 
 
+
+
+
 //function to generate tokens
 function generateTokens(user) {
     const accessToken = jwt.sign(
@@ -33,21 +36,21 @@ function generateTokens(user) {
 
 const registerUser = async(req,res)=>{
 
-    const{firstname,lastname,email,tel,password} = req.body
+    const{username,userlastname,useremail,usertel,userpassword1} = req.body
 
     try{
         //verify if this email is not in another user
-        const userExists = await User.findOne({email});
+        const userExists = await User.findOne({useremail});
 
         if(userExists){
             throw new Error ('E-mail já está em uso')
         }
 
         //hash senha
-        const hash = await bcrypt.hash(password,10);
+        const hash = await bcrypt.hash(userpassword1,10);
 
         //create a new user
-        const user = new User ({firstname,lastname,email,tel,password:hash});
+        const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash});
 
         //save user on database
         await user.save();
@@ -67,16 +70,16 @@ const registerUser = async(req,res)=>{
 }
 
 const loginUser = async(req,res) =>{
-    const{email,password} = req.body
+    const{useremail,userpassword1} = req.body
     try{
     //verify if the user exists on database
-    const user = await User.findOne({email});  
+    const user = await User.findOne({useremail});  
     if(!user){
         return res.status(401).json({ error: 'E-mail ou senha inválidos' });
     }
 
     //verify if the passwords is valid
-    const validPassword = bcrypt.compare(password,user.password);
+    const validPassword = bcrypt.compare(userpassword1,user.userpassword1);
 
     if(!validPassword){
         return res.status
@@ -87,7 +90,7 @@ const loginUser = async(req,res) =>{
             
     //return access token and refresh token
     return res.send({
-        user:{id:user._id , name:user.firstname,email:email},
+        user:{id:user._id , name:user.username,email:useremail},
         token : {accessToken,refreshToken}});
 
     }catch(err){

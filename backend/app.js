@@ -6,11 +6,12 @@ const database  = require('./db/db');
 const port = process.env.PORT
 const app = express();
 
+
 //api routes
 const user = require('./routes/userRoute')
 const barber = require('./routes/barberRoute')
 
-app.use(cors()); //enable cors
+app.use(cors('')); //enable cors
 app.use(express.json())
 app.use('/auth',user)
 app.use('/authbarber',barber)

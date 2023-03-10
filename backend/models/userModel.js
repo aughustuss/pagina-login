@@ -1,12 +1,13 @@
 const mongose = require('mongoose');
 
+
 const UserSchema = new mongose.Schema ({
 
-    firstname:{type:String,required:true} ,
-    lastname :{type:String,required:true},
+    username:{type:String,required:true} ,
+    userlastname :{type:String,required:true},
     email:{type:String,required:true},
-    tel:{type:String,required:true},
-    password:{type:String, required:true},
+    useremail:{type:String,required:true},
+    userpassword1:{type:String, required:true},
     role:{type:String,enum:['user','barber','admin'],default:'user'}
 
 },{
