@@ -4,12 +4,13 @@ import {
     HomePage
 } from './style'
 
+
 export const Home = () => {
     return (
         <>
             <HomePage>
                 <Content>
-                    Home
+                    
                 </Content>
             </HomePage>
         </>
