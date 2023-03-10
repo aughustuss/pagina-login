@@ -36,7 +36,7 @@ function generateTokens(user) {
 
 const registerUser = async(req,res)=>{
 
-    const{username,userlastname,useremail,usertel,userpassword1} = req.body
+    const{username,userlastname,useremail,usertel,userpassword1,userpassword2} = req.body
 
     try{
         //verify if this email is not in another user
@@ -48,9 +48,10 @@ const registerUser = async(req,res)=>{
 
         //hash senha
         const hash = await bcrypt.hash(userpassword1,10);
+        const hash2 = await bcrypt.hash(userpassword2,10)
 
         //create a new user
-        const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash});
+        const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash,userpassword2:hash});
 
         //save user on database
         await user.save();
