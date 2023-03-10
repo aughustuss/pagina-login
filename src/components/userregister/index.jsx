@@ -14,12 +14,11 @@ import { Button, TextField, createTheme, ThemeProvider, InputAdornment} from "@m
 import { Key, Mail, Phone, AccountBox } from "@mui/icons-material";
 import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
-import e from "express";
 import axios from "axios";
 
 
 export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
-
+   
     const theme = createTheme({
         palette:{
             mode: 'light',
@@ -44,7 +43,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
         validationSchema: registerSchema,
 
         onSubmit: data => {
-            axios.post('localhost:3000/auth/register', data).then((res) => {
+            axios.post("http://localhost:3000/auth/register", data).then((res) => {
                 console.log(res);
             }).catch((err) => {
                 console.log(err);
