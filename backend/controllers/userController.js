@@ -90,7 +90,7 @@ const loginUser = async(req,res) =>{
             
     //return access token and refresh token
     return res.send({
-        user:{id:user._id , name:user.username,email:useremail},
+        user:{id:user._id , name:user.username,lastname: user.userlastname,email:useremail},
         token : {accessToken,refreshToken}});
 
     }catch(err){
