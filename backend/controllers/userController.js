@@ -33,8 +33,7 @@ function generateTokens(user) {
     return { accessToken, refreshToken };
   }
   
-
-const registerUser = async(req,res)=>{
+  const registerUser = async(req,res)=>{
 
     const{username,userlastname,useremail,usertel,userpassword1,userpassword2} = req.body
 
@@ -46,12 +45,12 @@ const registerUser = async(req,res)=>{
             throw new Error ('E-mail já está em uso')
         }
 
-        //hash senha
-        const hash = await bcrypt.hash(userpassword1,10);
-        const hash2 = await bcrypt.hash(userpassword2,10)
+        //hash senhas
+        const hash1 = await bcrypt.hash(userpassword1,10);
+        const hash2 = await bcrypt.hash(userpassword2,10);
 
         //create a new user
-        const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash,userpassword2:hash});
+        const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash1,userpassword2:hash2});
 
         //save user on database
         await user.save();
