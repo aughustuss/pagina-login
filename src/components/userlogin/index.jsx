@@ -9,6 +9,9 @@ import {
 
 import { TextField, createTheme, ThemeProvider, InputAdornment, Button } from "@mui/material";
 import { Key, Login, Mail } from "@mui/icons-material";
+import { logSchema } from "../../validations/userlogin";
+import { useFormik } from "formik";
+import axios from "axios";
 
 export const UserLogin = ({ openModalOne, setOpenModalOne, closemodal }) => {
     const theme = createTheme({
@@ -23,11 +26,32 @@ export const UserLogin = ({ openModalOne, setOpenModalOne, closemodal }) => {
         }
     })
 
+    const {values, errors, handleChange, handleSubmit, isSubmitting} = useFormik({
+        initialValues: {
+            useremail: "",
+            userpassword1: "",
+
+        },
+        validationSchema: logSchema,
+
+        onSubmit: async (values, { setSubmitting }) => {
+            try {
+              const response = await axios.post('http://localhost:8000/auth/login', values);
+              console.log('Response:', response.data);
+              setSubmitting(false);
+            } catch (error) {
+              console.error('Error:', error);
+              setSubmitting(false);
+            }
+          }
+            
+    });
+
 
     return (
         <>
             {openModalOne ?
-                <LoginDiv>
+                <LoginDiv onSubmit={handleSubmit} >
 
                     <CloseBTN onClick={() => {
                         setOpenModalOne(false);
@@ -40,8 +64,11 @@ export const UserLogin = ({ openModalOne, setOpenModalOne, closemodal }) => {
                             style={{ marginBottom: "2em" }}
                             label="Email"
                             type="email"
-                            id="logineamil"
-                            name="loginemail"
+                            id="useremail"
+                            name="useremail"
+                            onChange={handleChange}
+                            value={values.useremail}
+                            helperText={errors.useremail && errors.useremail}
                             InputProps={
                                 {
                                     startAdornment: (
@@ -55,8 +82,11 @@ export const UserLogin = ({ openModalOne, setOpenModalOne, closemodal }) => {
                             style={{ marginBottom: "2em" }}
                             label="Senha"
                             type="password"
-                            id="loginpassword"
-                            name="loginpassword"
+                            id="userpassword1"
+                            name="userpassword1"
+                            value={values.userpassword1}
+                            onChange={handleChange}
+                            helperText={errors.userpassword1 && errors.userpassword1}
                             InputProps={
                                 {
                                     startAdornment: (
@@ -66,7 +96,7 @@ export const UserLogin = ({ openModalOne, setOpenModalOne, closemodal }) => {
                                     )
                                 }
                             } />
-                        <Button fullWidth variant="contained" style={{ color: "white", fontWeight: "bold", marginBottom: "2em" }} >Entrar</Button>
+                        <Button type="submit" fullWidth variant="contained" style={{ color: "white", fontWeight: "bold", marginBottom: "2em" }} >Entrar</Button>
                         <AccLink onClick={() => {
                             closemodal(false);
                         }} >Ainda não possui uma conta? Crie uma aqui.</AccLink>
