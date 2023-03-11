@@ -42,15 +42,16 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
         },
         validationSchema: registerSchema,
 
-        onSubmit: data => {
-            axios.post("http://localhost:8000/auth/register", data).then((res) => {
-                
-                console.log(res);
-            }).catch((err) => {
-                console.log(err);
-                console.log(data);
-            })
-        }
+        onSubmit: async (values, { setSubmitting }) => {
+            try {
+              const response = await axios.post('http://localhost:8000/auth/register', values);
+              console.log('Response:', response.data);
+              setSubmitting(false);
+            } catch (error) {
+              console.error('Error:', error);
+              setSubmitting(false);
+            }
+          }
             
     });
 
