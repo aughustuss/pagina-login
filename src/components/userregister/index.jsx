@@ -51,6 +51,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
               const response = await axios.post('http://localhost:8000/auth/register', values);
               resetForm();
               setSuccessDiv(true);
+              alert('Conta criada com sucesso.')
               setTimeout(() => {
                     navigate('../pages/emailconfirm');
               }, 5000);
