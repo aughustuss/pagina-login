@@ -6,7 +6,7 @@ export const ConfirmWrapper = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 300px;
+    height: 320px;
     background-color: #f1f2f3;
     display: flex;
     flex-direction: column;
@@ -46,6 +46,7 @@ export const CodeDiv = styled.div`
 
 export const ConfirmMenu = styled.label`
     padding: .3rem;
+    
 `
 
 export const ConfirmCode = styled.input`
@@ -58,7 +59,6 @@ export const ConfirmCode = styled.input`
 `
 
 export const ErrorMSG = styled.p`
-    margin-top: 2rem;
     position: absolute;
     bottom: 0;
     color: black;

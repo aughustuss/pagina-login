@@ -20,6 +20,7 @@ import {
     MenuIconDiv
 } from "./style"
 import { SideBar } from "../sidebar";
+import { Scroll } from "parallax-controller";
 
 
 export const Navbar = () => {
@@ -27,6 +28,34 @@ export const Navbar = () => {
     const location = useLocation();
     const [navBg, setnavBg] = useState("transparent");
     const [navDisplay, setnavDisplay] = useState("flex")
+    const [scroll, setScroll] = useState(false);
+
+    useEffect(() => {
+        const Scrolled = () =>{
+            if(window.scrollY > 60){
+                setScroll(true);
+            } else {
+                setScroll(false);
+            }
+        }
+        window.addEventListener('scroll', Scrolled);
+
+        return () => {
+            window.removeEventListener('scroll', Scrolled);
+        }
+    })
+
+    
+
+    const Scrolling = () => {
+        if(window.scrollY >= 60){
+            setnavBg("#111111")
+        } else {
+            setnavBg("transparent")
+        }
+    }
+
+    window.addEventListener('scroll', Scrolling);
 
     useEffect(() => {
         if(window.location.pathname === '/appointment'){
@@ -35,7 +64,8 @@ export const Navbar = () => {
         else {
             setnavBg("transparent");
         }
-    });
+    }, [window.location.pathname]);
+
 
     useEffect(() => {
         if(window.location.pathname === '/emailconfirm'){
@@ -86,16 +116,14 @@ export const Navbar = () => {
         setOpenSideBar(prev => !prev);
     }
 
-    
-
     const HandleClick = () => {
         setOpenList(!openList);
     }
 
     return (
         <>
-            <Navigation style={{backgroundColor: navBg}}>
-                <Nav style={{display: navDisplay}}>
+            <Navigation>
+                <Nav style={{display: navDisplay, backgroundColor: navBg }}>
                     <LogoDiv to="/">
                         <Logo alt="Brasil Barber's" src={barber}/>
                     </LogoDiv>

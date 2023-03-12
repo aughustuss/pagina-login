@@ -16,6 +16,7 @@ export const LoginDiv = styled.form`
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 1000;
 `
 
 export const LoginSpan = styled.div`
