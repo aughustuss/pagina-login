@@ -26,8 +26,9 @@ export const EmailConfirm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-        const response = await axios.post("http://localhost:8000/auth/confirm-email", { vector, useremail: email });
+        const response = await axios.post("http://localhost:8000/auth/confirm-email", { vector, useremail: "marcospauloirmaodovinnicius12@gmail.com" });
         console.log(response.data);
+        console.log(vector)
         } catch (error) {
         console.error(error);
         }

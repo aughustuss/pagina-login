@@ -91,9 +91,10 @@ const confirmEmail = async(req,res) =>{
         }
 
         //teste
-
+        console.log(`Código de confirmação válido: ${confirmationCode}`);
+        console.log(`Código de confirmação armazenado: ${user.confirmationCode}`);
         //verify if code is valid
-        if(!(user.confirmationCode !== confirmationCode)){
+        if(user.confirmationCode !== confirmationCode){
             throw new Error('Codigo de confirmação invalido');
         }
 
