@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import {
     ConfirmDiv,
     ConfirmTitle,
@@ -9,9 +9,11 @@ import {
     ErrorMsg
 } from './style'
 import axios from 'axios';
+import { EmailContext } from '../../components/userregister/emailcontext';
 
-export const EmailConfirm = () => {
+export const EmailConfirm = (props) => {
 
+    const email = useContext(EmailContext)
     const [values, setValues] = useState(Array(6).fill(''));
     
     const [errosDiv, setErrorDiv] = useState(false);
@@ -37,7 +39,7 @@ export const EmailConfirm = () => {
 
     return (
         <ConfirmDiv onSubmit={handleSubmit}>
-            <ConfirmTitle>Nós enviamos um e-mail para: {}</ConfirmTitle>
+            <ConfirmTitle>Nós enviamos um e-mail para: {email}</ConfirmTitle>
             <CodeDiv>
                     <ConfirmMenu>
                     
