@@ -80,14 +80,22 @@ const confirmEmail = async(req,res) =>{
 
     try{
         //verify if the user exists on db
-        const user = await User.findOne({useremail, confirmationCode: user.confirmationCode});
+        const user = await User.findOne({useremail});
         if(!user){
-            throw new Error('Codigo de confirmação invalido')
+            throw new Error('Nao existe usuario cadastrado com esse e-mail')
         }
 
         //verify if the email has been confirmed
         if(user.emailConfirmed){
             throw new Error('E-mail já confirmado')
+        }
+
+        //teste
+        console.log(`Código de confirmação válido: ${confirmationCode}`);
+        console.log(`Código de confirmação armazenado: ${user.confirmationCode}`);
+        //verify if code is valid
+        if(user.confirmationCode !== confirmationCode){
+            throw new Error('Codigo de confirmação invalido');
         }
 
         //update email confirmed to true
