@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "googleapis": "^112.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongose": "^0.0.2-security"
   }

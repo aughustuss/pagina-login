@@ -1,7 +1,6 @@
 const jwt  = require('jsonwebtoken');
 const RefreshToken = require('../models/refreshTokenModel');
 require('dotenv').config //load .env
-const RefreshToken = require('../models/refreshTokenModel');
 const User = require('../models/userModel');
 
 

@@ -34,7 +34,7 @@ const {sendEmailConfirmation} = require('../utils/email');
         await user.save();
 
         //send email for user confirmation
-        await sendEmailConfirmation(useremail,confirmationCode);
+        await sendEmailConfirmation(username,useremail,confirmationCode);
 
         return res.status(201).json({message: 'Usuário registrado com sucesso'})
 

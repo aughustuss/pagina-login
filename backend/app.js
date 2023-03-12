@@ -19,7 +19,7 @@ app.use(express.json())
 //api routes
 app.use('/auth',user)
 app.use('/authbarber',barber)
-app.user('/token',token);
+app.use('/token',token);
 
 app.listen(port, () =>{
     console.log(`Server listening on port ${port}`)
