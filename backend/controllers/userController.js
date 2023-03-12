@@ -86,7 +86,7 @@ const confirmEmail = async(req,res) =>{
         }
 
         //verify if the email has been confirmed
-        if(user.emailConfirmed){
+        if(!user.emailConfirmed){
             throw new Error('E-mail já confirmado')
         }
 
