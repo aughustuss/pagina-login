@@ -13,15 +13,14 @@ import EmailContext from '../../Emailcontext';
 
 export const EmailConfirm = () => {
 
-    const email = useContext(EmailContext)
     const [values, setValues] = useState(Array(6).fill(''));
-    
+    const email = useContext(EmailContext);
     const [errosDiv, setErrorDiv] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            await axios.post('http://localhost:8000/auth/confirm-email', {values, useremail: 'guilhermeferraz@gmail.com'});
+            await axios.post('http://localhost:8000/auth/confirm-email', {values, useremail: 'augusto@gmail.com'});
             setValues(Array(6).fill(''));
             alert('Foi')
             
