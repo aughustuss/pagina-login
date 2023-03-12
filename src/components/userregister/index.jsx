@@ -17,7 +17,7 @@ import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
-import { EmailContext } from "./emailcontext";
+import EmailContext from "../../Emailcontext";
 
 export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
 
@@ -54,7 +54,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
               setSuccessDiv(true);
               alert('Conta criada com sucesso.')
               setTimeout(() => {
-                    navigate('../emailconfirm');
+                    navigate('/emailconfirm');
               }, 5000);
               setSubmitting(false);
               setEmail(values.useremail);

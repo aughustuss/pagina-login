@@ -9,7 +9,7 @@ import {
     ErrorMsg
 } from './style'
 import axios from 'axios';
-import { EmailContext } from '../../components/userregister/emailcontext';
+import EmailContext from '../../Emailcontext';
 
 export const EmailConfirm = (props) => {
 
@@ -21,7 +21,7 @@ export const EmailConfirm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            await axios.post('http://localhost:8000/auth/confirm-email', {values, useremail: 'pedrocoimbra124123@gmail.com'});
+            await axios.post('http://localhost:8000/auth/confirm-email', {values, useremail: 'guilhermeferraz@gmail.com'});
             setValues(Array(6).fill(''));
             alert('Foi')
             
