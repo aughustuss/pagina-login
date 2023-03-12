@@ -91,7 +91,7 @@ const confirmEmail = async(req,res) =>{
         }
 
         //verify if code is valid
-        if(user.confirmationCode !== confirmationCode){
+        if(!(user.confirmationCode !== confirmationCode)){
             throw new Error('Codigo de confirmação invalido');
         }
 
@@ -104,8 +104,7 @@ const confirmEmail = async(req,res) =>{
 
         //return access token and refresh token
         res.setHeader('Authorization', `Bearer ${accessToken}`);
-        res.status(200).json({ message: 'Login realizado com sucesso' });
-        console.log(`Refresh token: ${refreshToken}`);
+        res.status(200).json({ message: 'Login realizado com sucesso',refreshToken: refreshToken});
 
     }catch(err){
         console.error(err);
