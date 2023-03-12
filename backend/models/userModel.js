@@ -18,6 +18,18 @@ const UserSchema = new mongose.Schema ({
 })
 
 
+UserSchema.path('userpassword1').validate(function(value){
+    const user = this;
+    return user.userpassword2 === value;
+},'As senhas devem ser iguais')
+
+
+UserSchema.path('userpassword2').validate(function(value){
+    const user = this;
+    return user.userpassword1 === value;
+},'As senhas devem ser iguais')
+
+
 
 const User = mongose.model('User',UserSchema);
 

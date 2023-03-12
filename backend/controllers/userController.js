@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
-const{generateTokens} = require('../utils/token');
-const {sendEmailConfirmation} = require('../utils/email');
+const { generateTokens } = require('../utils/token');
+const { sendEmailConfirmation , resetPassword} = require('../utils/email');
+
 
 
   const registerUser = async(req,res)=>{
@@ -112,8 +113,82 @@ const confirmEmail = async(req,res) =>{
     }
 }
 
+const sendPasswordReset = async(req,res) =>{
+    const {useremail} = req.body;
+
+    //verify if the user exists on db
+    try{
+        //verify if the user exists on db
+        const user = await User.findOne({useremail});
+        if(!user){
+            throw new Error('Usuario não encontrado')
+        }
+
+        //generate random code for confirmation
+        const confirmationCode = Math.floor(Math.random()*1000000);
+
+        //add confirmation code to db
+        user.confirmationCode = confirmationCode;
+
+        //save user on database
+        await user.save();
+
+        //send email for user confirmation
+        await resetPassword(useremail,confirmationCode);
+
+        return res.status(201).json({message: 'Codigo para alteração de senha enviado com sucesso'})
+
+    }catch(err){
+        return res.status(400).json({ error: err.message });
+    }
+
+}
+
+const verifyPasswordReset = async(req,res) =>{
+    const { useremail, confirmationCode,userpassword1,userpassword2 } = req.body
+
+    
+    //verify if the user exists on db
+    try{
+        //verify if the user exists on db
+        const user = await User.findOne({useremail});
+        if(!user){
+            throw new Error('Usuario não encontrado')
+        }
+
+        //verify reset code is equals to type code
+        if(confirmationCode !== user.confirmationCode){
+            return res.status(400).json({ message: 'O código de verificação fornecido está incorreto.'})
+        }
+
+        //to do -> verify password format
+
+        //verify if the new password it is equal to newpasswordconfirm
+        if(userpassword1!==userpassword2){
+            return res.status(400).json({ message: 'A nova senha e a confirmação da senha não são iguais'})
+        }
+
+        //hash senhas
+        const salt = await bcrypt.genSalt(10)
+        const hash1 = await bcrypt.hash(userpassword1,salt);
+        const hash2 = await bcrypt.hash(userpassword2,salt);
+
+        user.userpassword1 = hash1;
+        user.userpassword2 = hash2;
+
+        await user.save();
+        return res.status(200).json({ message: 'A senha foi alterada com sucesso'})
+
+    }catch(err){
+        return res.status(500).json({ message: 'Ocorreu um erro ao atualizar a senha'})
+    }
+}
+
+
 module.exports = {
     registerUser,
     loginUser,
-    confirmEmail
+    confirmEmail,
+    sendPasswordReset,
+    verifyPasswordReset
 }
