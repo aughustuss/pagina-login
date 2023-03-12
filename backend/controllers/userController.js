@@ -5,7 +5,7 @@ const { sendEmailConfirmation , resetPassword} = require('../utils/email');
 
 
 
-  const registerUser = async(req,res)=>{
+const registerUser = async(req,res)=>{
 
     const{username,userlastname,useremail,usertel,userpassword1,userpassword2} = req.body
 
