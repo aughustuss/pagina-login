@@ -86,7 +86,7 @@ const confirmEmail = async(req,res) =>{
         }
 
         //verify if the email has been confirmed
-        if(!user.emailConfirmed){
+        if(user.emailConfirmed){
             throw new Error('E-mail já confirmado')
         }
 
@@ -104,7 +104,7 @@ const confirmEmail = async(req,res) =>{
 
         //return access token and refresh token
         res.setHeader('Authorization', `Bearer ${accessToken}`);
-        res.status(200).json({ refreshToken: tokens.refreshToken });
+        res.status(200).json({ refreshToken: refreshToken });
 
     }catch(err){
         console.error(err);
