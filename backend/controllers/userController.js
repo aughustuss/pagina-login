@@ -104,7 +104,7 @@ const confirmEmail = async(req,res) =>{
 
         //return access token and refresh token
         res.setHeader('Authorization', `Bearer ${accessToken}`);
-        res.status(200).json({ message: 'Login realizado com sucesso',refreshToken: refreshToken});
+        res.status(200).json({ refreshToken: tokens.refreshToken });
 
     }catch(err){
         console.error(err);
