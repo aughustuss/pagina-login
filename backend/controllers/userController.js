@@ -54,6 +54,11 @@ const loginUser = async(req,res) =>{
         return res.status(401).json({ error: 'E-mail ou senha inválidos' });
     }
 
+    //verify if the email has been confirmed
+    if(!user.emailConfirmed){
+        throw new Error('E-mail não confirmado')
+    }
+
     //verify if the passwords is valid
     const validPassword = bcrypt.compare(userpassword1,user.userpassword1);
 
@@ -65,9 +70,8 @@ const loginUser = async(req,res) =>{
     const {accessToken,refreshToken} = generateTokens(user)
             
     //return access token and refresh token
-    res.setHeader('Authorization', `Bearer ${accessToken}`);
-    res.status(200).json({ message: 'Login realizado com sucesso' });
-    console.log(`Refresh token: ${refreshToken}`);
+    res.setHeader('Authorization', `${accessToken}`);
+    res.status(200).json({ refreshToken: refreshToken });
 
     }catch(err){
         return res.status(400).json({ error: err.message });
@@ -109,7 +113,7 @@ const confirmEmail = async(req,res) =>{
         const {accessToken, refreshToken} = generateTokens(user)
 
         //return access token and refresh token
-        res.setHeader('Authorization', `Bearer ${accessToken}`);
+        res.setHeader('Authorization', `${accessToken}`);
         res.status(200).json({ refreshToken: refreshToken });
 
     }catch(err){
