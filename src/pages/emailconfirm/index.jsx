@@ -11,7 +11,7 @@ import {
 import axios from 'axios';
 import EmailContext from '../../Emailcontext';
 
-export const EmailConfirm = (props) => {
+export const EmailConfirm = () => {
 
     const email = useContext(EmailContext)
     const [values, setValues] = useState(Array(6).fill(''));
