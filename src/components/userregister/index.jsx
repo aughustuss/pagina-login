@@ -17,6 +17,7 @@ import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
+import { EmailContext } from "./emailcontext";
 
 export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
 
@@ -34,7 +35,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
     }) 
 
     const navigate = useNavigate();
-
+    const [email, setEmail] = useState(''); 
     const {values, errors, handleChange, handleSubmit, isSubmitting, resetForm} = useFormik({
         initialValues: {
             username: "",
@@ -53,9 +54,10 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
               setSuccessDiv(true);
               alert('Conta criada com sucesso.')
               setTimeout(() => {
-                    navigate('../pages/emailconfirm');
+                    navigate('../emailconfirm');
               }, 5000);
               setSubmitting(false);
+              setEmail(values.useremail);
             } catch (error) {
               console.error('Error:', error);
               setSubmitting(false);
@@ -68,7 +70,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
     return (
         <>
             {openModalTwo ? 
-           
+           <EmailContext.Provider value={email}>
            <RegisterDiv onSubmit={handleSubmit}>
                 <CloseBTN onClick={() => {
                     setopenModalTwo(false);                   
@@ -182,8 +184,9 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
                  </ThemeProvider> 
                  
             </RegisterDiv> 
-            
+            </EmailContext.Provider>
             : null}
+            
         </>
     )
 }
