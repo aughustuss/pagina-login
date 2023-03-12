@@ -92,6 +92,7 @@ export const Navbar = () => {
                     </LogoDiv>
                     <LinksMenu>
                         <Links to="/appointment">Agendar horário</Links>
+                        <Links to="/emailconfirm">Confirmação de email</Links>
                         <Links>ver barbearias próximas</Links>
                         <DropdownMenu>
                             
