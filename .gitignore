@@ -19,8 +19,6 @@
 .env.test.local
 .env.production.local
 
-#credential
-./credentials.json
 
 npm-debug.log*
 yarn-debug.log*
