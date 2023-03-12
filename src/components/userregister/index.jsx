@@ -7,7 +7,8 @@ import {
     AccLink,
     RegisterSpan,
     LoadingDiv,
-    Loading
+    Loading,
+    SuccessDiv
 } from './style'
 
 import { Button, TextField, createTheme, ThemeProvider, InputAdornment} from "@mui/material";
@@ -19,6 +20,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 
 export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
 
+    const [successDiv, setSuccessDiv] = useState(false);
     const theme = createTheme({
         palette:{
             mode: 'light',
@@ -48,7 +50,10 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
             try {
               const response = await axios.post('http://localhost:8000/auth/register', values);
               resetForm();
-              navigate('../pages/emailconfirm')
+              setSuccessDiv(true);
+              setTimeout(() => {
+                    navigate('../pages/emailconfirm');
+              }, 5000);
               setSubmitting(false);
             } catch (error) {
               console.error('Error:', error);
@@ -67,11 +72,12 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
                 <CloseBTN onClick={() => {
                     setopenModalTwo(false);                   
                 }} >X</CloseBTN>
+
                 <RegisterSpan><AccountBox style={{width: "42px", height: "42px"}}/></RegisterSpan>
                 <RegisterTitle>Crie a sua conta</RegisterTitle>
-                
-                
+                                
                 <ThemeProvider  theme={theme}>
+                    
                     <RegisterName style={{marginBottom: "1em"}}  >
                         <TextField
                         label="Nome" 
@@ -173,6 +179,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
                     }}>Já possui uma conta? Clique aqui.</AccLink>
 
                  </ThemeProvider> 
+                 
             </RegisterDiv> 
             
             : null}

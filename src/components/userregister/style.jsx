@@ -102,3 +102,11 @@ export const Loading= styled.span`
 
 `
 
+export const SuccessDiv = styled.div`
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: green;
+
+`
