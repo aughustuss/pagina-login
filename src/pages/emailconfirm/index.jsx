@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import React, { useRef, useState } from 'react'
 import {
     ConfirmDiv,
+    ConfirmTitle,
     CodeDiv,
     ConfirmMenu,
     ConfirmCode,
@@ -18,9 +19,10 @@ export const EmailConfirm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            await axios.post('', values);
+            await axios.post('http://localhost:8000/auth/confirm-email', {values, useremail: 'pedrocoimbra124123@gmail.com'});
             setValues(Array(6).fill(''));
             alert('Foi')
+            
         } catch (e){
             console.log(e);
             alert('Nao foi.')
@@ -35,6 +37,7 @@ export const EmailConfirm = () => {
 
     return (
         <ConfirmDiv onSubmit={handleSubmit}>
+            <ConfirmTitle>Nós enviamos um e-mail para: {}</ConfirmTitle>
             <CodeDiv>
                     <ConfirmMenu>
                     

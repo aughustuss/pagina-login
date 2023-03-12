@@ -14,6 +14,12 @@ export const ConfirmDiv = styled.form`
     flex-direction: column;
 `
 
+export const ConfirmTitle = styled.h4`
+    
+    text-align: center;
+    
+`
+
 export const CodeDiv = styled.div`
     
     width: 100%;
