@@ -13,27 +13,24 @@ import EmailContext from '../../Emailcontext';
 
 export const EmailConfirm = () => {
 
-    const [values, setValues] = useState(Array(6).fill(''));
     const email = useContext(EmailContext);
-    const [errosDiv, setErrorDiv] = useState(false);
+    const [vector, setVector] = useState([0, 0, 0, 0, 0, 0]);
+
+    const handleInputChange = (index, e) => {
+        const newValue = parseInt(e.target.value, 10);
+        const updatedVector = [...vector];
+        updatedVector[index] = newValue;
+        setVector(updatedVector);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            await axios.post('http://localhost:8000/auth/confirm-email', {values, useremail: 'augusto@gmail.com'});
-            setValues(Array(6).fill(''));
-            alert('Foi')
-            
-        } catch (e){
-            console.log(e);
-            alert('Nao foi.')
-        } 
-    }
-
-    const handleChange = (e, i) => {
-        const newValues = [...values];
-        newValues[i] = e.target.value;
-        setValues(newValues);
+        try {
+        const response = await axios.post("http://localhost:8000/auth/confirm-email", { vector, useremail: email });
+        console.log(response.data);
+        } catch (error) {
+        console.error(error);
+        }
     };
 
     return (
@@ -41,29 +38,19 @@ export const EmailConfirm = () => {
             <ConfirmTitle>Nós enviamos um e-mail para: {email}</ConfirmTitle>
             <CodeDiv>
                     <ConfirmMenu>
-                    
-                    <ConfirmCode maxLength={1} type="text" value={values[0]} onChange={(e) => handleChange(e, 0)} ></ConfirmCode>
-                </ConfirmMenu>
-                <ConfirmMenu>
-                   
-                    <ConfirmCode maxLength={1} type="text" value={values[1]} onChange={(e) => handleChange(e, 1)} ></ConfirmCode>
-                </ConfirmMenu>
-                <ConfirmMenu>
-                    
-                    <ConfirmCode maxLength={1} type="text" value={values[2]} onChange={(e) => handleChange(e, 2)} ></ConfirmCode>
-                </ConfirmMenu>
-                <ConfirmMenu>
-                    
-                    <ConfirmCode maxLength={1} type="text" value={values[3]} onChange={(e) => handleChange(e, 3)} ></ConfirmCode>
-                </ConfirmMenu>
-                <ConfirmMenu>
-                    
-                    <ConfirmCode maxLength={1} type="text" value={values[4]} onChange={(e) => handleChange(e, 4)} ></ConfirmCode>
-                </ConfirmMenu>
-                <ConfirmMenu>
-                    
-                    <ConfirmCode maxLength={1} type="text" value={values[5]} onChange={(e) => handleChange(e, 5)} ></ConfirmCode>
-                </ConfirmMenu>
+                        {vector.map((value, index) => (
+                            <ConfirmCode 
+                            key={index}
+                            type="number"
+                            value={value}
+                            onChange={(e) => {
+                                handleInputChange(index, e)
+                            }}
+                            min={0}
+                            max={9}
+                            />
+                        ))}
+                    </ConfirmMenu>
             </CodeDiv>
            
             <Button variant="contained" type="submit" >Enviar</Button>

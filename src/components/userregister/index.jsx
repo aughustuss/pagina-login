@@ -55,12 +55,13 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
                 const response = await axios.post('http://localhost:8000/auth/register', values);
                 resetForm();
                 setSuccessDiv(true);
+                setuseremail(values.useremail);
                 alert('Conta criada com sucesso.')
                 setTimeout(() => {
                     navigate('/emailconfirm');
                 }, 5000);
                 setSubmitting(false);
-                setuseremail(values.useremail);
+                
                 console.log(useremail);
             } catch (error) {
                 console.error('Error:', error);
