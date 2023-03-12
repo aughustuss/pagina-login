@@ -26,7 +26,7 @@ const registerUser = async(req,res)=>{
         const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash1,userpassword2:hash2});
 
         //generate random code for confirmation
-        const confirmationCode = Math.floor(Math.random()*10000000);
+        const confirmationCode = Math.floor(Math.random()*1000000);
 
         //add confirmation code to db
         user.confirmationCode = confirmationCode;
@@ -158,7 +158,7 @@ const sendPasswordReset = async(req,res) =>{
         }
 
         //generate random code for confirmation
-        const confirmationCode = Math.floor(Math.random()*10000000);
+        const confirmationCode = Math.floor(Math.random()*1000000);
 
         //add confirmation code to db
         user.confirmationCode = confirmationCode;
