@@ -25,7 +25,7 @@ const {sendEmailConfirmation} = require('../utils/email');
         const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash1,userpassword2:hash2});
 
         //generate random code for confirmation
-        const confirmationCode = Math.floor(Math.random()*10000);
+        const confirmationCode = Math.floor(Math.random()*1000000);
 
         //add confirmation code to db
         user.confirmationCode = confirmationCode;
