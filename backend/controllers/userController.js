@@ -24,10 +24,11 @@ const registerUser = async(req,res)=>{
 
         //create a new user
         const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash1,userpassword2:hash2});
-
+        
         //generate random code for confirmation
-        const confirmationCode = Math.floor(Math.random()*1000000);
-
+        let confirmationCode = Math.floor(Math.random() * 1000000); //  0 - 999999
+        confirmationCode = confirmationCode.toString().padStart(6, '0'); //add 0 if its necessary
+        
         //add confirmation code to db
         user.confirmationCode = confirmationCode;
 
@@ -54,6 +55,11 @@ const loginUser = async(req,res) =>{
         return res.status(401).json({ error: 'E-mail ou senha inválidos' });
     }
 
+    //verify if the email has been confirmed
+    if(!user.emailConfirmed){
+        throw new Error('E-mail não confirmado')
+    }
+
     //verify if the passwords is valid
     const validPassword = bcrypt.compare(userpassword1,user.userpassword1);
 
@@ -65,18 +71,41 @@ const loginUser = async(req,res) =>{
     const {accessToken,refreshToken} = generateTokens(user)
             
     //return access token and refresh token
-    res.setHeader('Authorization', `Bearer ${accessToken}`);
-    res.status(200).json({ message: 'Login realizado com sucesso' });
-    console.log(`Refresh token: ${refreshToken}`);
+    res.setHeader('Authorization', `${accessToken}`);
+    res.status(200).json({ refreshToken: refreshToken });
 
     }catch(err){
         return res.status(400).json({ error: err.message });
 }         
 }
 
+const getProfile = async(req,res) =>{
+    try{
+        const user = await User.findById(req.params.id);
+
+        //verify if id exists
+        if(!user){
+            return res.status(404).json({error:'Perfil não encontrado'})
+        }
+        //verify if the email has been confirmed
+        if(!user.emailConfirmed){
+            return res.status(404).json({error:'O e-mail não está confirmado'})
+        }
+        //show user 
+        res.send(user);
+
+    }catch(err){
+        console.error(err);
+        return res.status(400).json({message: 'Ocorreu um erro ao mostrar o perfil do usuario'});
+    }
+}
+
 
 const confirmEmail = async(req,res) =>{
     const {useremail,confirmationCode} = req.body;
+    
+        console.log('useremail:', useremail);
+        console.log('confirmationCode:', confirmationCode);
 
     try{
         //verify if the user exists on db
@@ -92,7 +121,10 @@ const confirmEmail = async(req,res) =>{
 
         //teste
         console.log(`Código de confirmação válido: ${confirmationCode}`);
+        console.log(typeof(confirmationCode))
         console.log(`Código de confirmação armazenado: ${user.confirmationCode}`);
+        console.log(typeof(user.confirmationCode))
+
         //verify if code is valid
         if(user.confirmationCode !== confirmationCode){
             throw new Error('Codigo de confirmação invalido');
@@ -106,7 +138,7 @@ const confirmEmail = async(req,res) =>{
         const {accessToken, refreshToken} = generateTokens(user)
 
         //return access token and refresh token
-        res.setHeader('Authorization', `Bearer ${accessToken}`);
+        res.setHeader('Authorization', `${accessToken}`);
         res.status(200).json({ refreshToken: refreshToken });
 
     }catch(err){
@@ -127,7 +159,9 @@ const sendPasswordReset = async(req,res) =>{
         }
 
         //generate random code for confirmation
-        const confirmationCode = Math.floor(Math.random()*1000000);
+        let confirmationCode = Math.floor(Math.random() * 1000000); //  0 - 999999
+        confirmationCode = confirmationCode.toString().padStart(6, '0'); //add 0 if its necessary
+        
 
         //add confirmation code to db
         user.confirmationCode = confirmationCode;
@@ -190,6 +224,7 @@ const verifyPasswordReset = async(req,res) =>{
 module.exports = {
     registerUser,
     loginUser,
+    getProfile,
     confirmEmail,
     sendPasswordReset,
     verifyPasswordReset
