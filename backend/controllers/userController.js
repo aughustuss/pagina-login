@@ -90,8 +90,12 @@ const confirmEmail = async(req,res) =>{
             throw new Error('E-mail já confirmado')
         }
 
+
+        //get array elementes and trasnforme in string
+        const code = confirmationCode.join('');
+
         //verify if code is valid
-        if(user.confirmationCode !== confirmationCode){
+        if(user.confirmationCode !== code){
             throw new Error('Codigo de confirmação invalido');
         }
 
