@@ -77,6 +77,9 @@ const loginUser = async(req,res) =>{
 
 const confirmEmail = async(req,res) =>{
     const {useremail,confirmationCode} = req.body;
+    
+        console.log('useremail:', useremail);
+        console.log('confirmationCode:', confirmationCode);
 
     try{
         //verify if the user exists on db
