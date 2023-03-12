@@ -1,38 +1,9 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
-const jwt  = require('jsonwebtoken');
-const RefreshToken = require('../models/refreshTokenModel');
-require('dotenv').config //load .env
+const{generateTokens} = require('../utils/token');
+const {sendEmailConfirmation} = require('../utils/email');
 
 
-
-
-
-//function to generate tokens
-function generateTokens(user) {
-    const accessToken = jwt.sign(
-      { userId: user.id },
-      process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
-    );
-  
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: process.env.REFRESH_TOKEN_EXPIRATION }
-    );
-  
-    const refreshTokenObject = new RefreshToken({
-      userId: user.id,
-      token: refreshToken,
-      expiresAt: new Date(Date.now() + process.env.REFRESH_TOKEN_EXPIRATION * 1000)
-    });
-  
-    refreshTokenObject.save();
-  
-    return { accessToken, refreshToken };
-  }
-  
   const registerUser = async(req,res)=>{
 
     const{username,userlastname,useremail,usertel,userpassword1,userpassword2} = req.body
@@ -46,22 +17,26 @@ function generateTokens(user) {
         }
 
         //hash senhas
-        const hash1 = await bcrypt.hash(userpassword1,10);
-        const hash2 = await bcrypt.hash(userpassword2,10);
+        const salt = await bcrypt.genSalt(10)
+        const hash1 = await bcrypt.hash(userpassword1,salt);
+        const hash2 = await bcrypt.hash(userpassword2,salt);
 
         //create a new user
         const user = new User ({username,userlastname,useremail,usertel,userpassword1:hash1,userpassword2:hash2});
 
+        //generate random code for confirmation
+        const confirmationCode = Math.floor(Math.random()*10000);
+
+        //add confirmation code to db
+        user.confirmationCode = confirmationCode;
+
         //save user on database
         await user.save();
-        
 
-        //create token 
-        const {accessToken,refreshToken} = generateTokens(user);
+        //send email for user confirmation
+        await sendEmailConfirmation(useremail,confirmationCode);
 
-        //return saved user and tokens
-        return res.send({user,token : {accessToken,refreshToken}});
-
+        return res.status(201).json({message: 'Usuário registrado com sucesso'})
 
 
     }catch(err){
@@ -89,18 +64,56 @@ const loginUser = async(req,res) =>{
     const {accessToken,refreshToken} = generateTokens(user)
             
     //return access token and refresh token
-    return res.send({
-        user:{id:user._id , name:user.username,lastname: user.userlastname,email:useremail},
-        token : {accessToken,refreshToken}});
+    res.setHeader('Authorization', `Bearer ${accessToken}`);
+    res.status(200).json({ message: 'Login realizado com sucesso' });
+    console.log(`Refresh token: ${refreshToken}`);
 
     }catch(err){
-
-    return res.status(400).json({ error: err.message });
+        return res.status(400).json({ error: err.message });
 }         
 }
 
 
+const confirmEmail = async(req,res) =>{
+    const {useremail,confirmationCode} = req.body;
+
+    try{
+        //verify if the user exists on db
+        const user = await User.findOne({useremail});
+        if(!user){
+            throw new Error('Usuario não encontrado')
+        }
+
+        //verify if the email has been confirmed
+        if(user.emailConfirmed){
+            throw new Error('E-mail já confirmado')
+        }
+
+        //verify if code is valid
+        if(user.confirmationCode !== confirmationCode){
+            throw new Error('Codigo de confirmação invalido');
+        }
+
+        //update email confirmed to true
+        user.emailConfirmed = true;
+        await user.save();
+
+        //generate tokens for user
+        const {accessToken, refreshToken} = generateTokens(user)
+
+        //return access token and refresh token
+        res.setHeader('Authorization', `Bearer ${accessToken}`);
+        res.status(200).json({ message: 'Login realizado com sucesso' });
+        console.log(`Refresh token: ${refreshToken}`);
+
+    }catch(err){
+        console.error(err);
+        res.status(400).json({ error: err.message });
+    }
+}
+
 module.exports = {
     registerUser,
     loginUser,
+    confirmEmail
 }

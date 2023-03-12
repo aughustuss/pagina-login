@@ -9,6 +9,8 @@ const UserSchema = new mongose.Schema ({
     usertel:{type:String,required:true},
     userpassword1:{type:String, required:true},
     userpassword2:{type:String, required:true},
+    confirmationCode:{type:Number,required:true},
+    emailConfirmed:{type:Boolean,default:false},
     role:{type:String,enum:['user','barber','admin'],default:'user'}
 
 },{

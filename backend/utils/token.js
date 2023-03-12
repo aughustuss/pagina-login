@@ -1,12 +1,35 @@
 const jwt  = require('jsonwebtoken');
 const RefreshToken = require('../models/refreshTokenModel');
 require('dotenv').config //load .env
+const RefreshToken = require('../models/refreshTokenModel');
+const User = require('../models/userModel');
 
 
-/// nao funciona
-class AuthService{
+async function renewRefreshToken (refreshToken) {
+    try{
+        //verify if refresh token is valid and get user id
+        const decoded = '';
+        const userId = decoded._id;
 
-    static async generateTokens(user) {
+        //verify if the refresh token exists on db
+        const refreshTokenDoc = await RefreshToken.findOne({ _id, token: refreshToken })
+        if(!refreshTokenDoc){
+            return new Error("Refresh Token Invalido")
+        }
+
+        //generate a new access token
+        const user = await User.findById(userId);
+        const accessToken = ''
+
+        return accessToken
+
+    }catch(err){
+        console.error(err);
+        throw err;
+    }
+}
+
+function generateTokens(user){
     const accessToken = jwt.sign(
         { userId: user.id },
         process.env.ACCESS_TOKEN_SECRET,
@@ -28,7 +51,13 @@ class AuthService{
     refreshTokenObject.save();
 
     return { accessToken, refreshToken };
-    }
+
 }
 
-module.exports = AuthService;
+
+
+
+module.exports ={
+     generateTokens,
+     renewRefreshToken    
+};
