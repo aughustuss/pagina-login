@@ -1,8 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
-export const RegisterDiv = styled.form`
-    
+export const RegisterWrapper = styled.div`
     height: fit-content;
     width: 450px;
     background-color: #FFF;
@@ -17,6 +16,14 @@ export const RegisterDiv = styled.form`
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     z-index: 1000;
+`
+
+export const RegisterDiv = styled.form`
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
 `
 
 export const RegisterSpan = styled.span`
@@ -109,4 +116,9 @@ export const SuccessDiv = styled.div`
     align-items: center;
     color: green;
 
+`
+
+export const NoDisplayDiv = styled.div`
+    
+    display: none;
 `

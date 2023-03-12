@@ -8,7 +8,9 @@ import {
     RegisterSpan,
     LoadingDiv,
     Loading,
-    SuccessDiv
+    SuccessDiv,
+    NoDisplayDiv,
+    RegisterWrapper
 } from './style'
 
 import { Button, TextField, createTheme, ThemeProvider, InputAdornment } from "@mui/material";
@@ -17,8 +19,7 @@ import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
-import EmailContext from "../../Emailcontext";
-import { EmailConfirm } from "../../pages/emailconfirm";
+import EmailConfirm from "../../pages/emailconfirm";
 
 export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal }) => {
 
@@ -37,7 +38,7 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
 
     const navigate = useNavigate();
 
-    const [useremail, setuseremail] = useState('');
+
 
     const { values, errors, handleChange, handleSubmit, isSubmitting, resetForm } = useFormik({
         initialValues: {
@@ -54,15 +55,15 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
             try {
                 const response = await axios.post('http://localhost:8000/auth/register', values);
                 resetForm();
-                setSuccessDiv(true);
-                setuseremail(values.useremail);
+                setSuccessDiv(true); 
+                setSubmitting(false);
+                setopenModalTwo(false);
+                localStorage.setItem('useremail', values.useremail);
                 alert('Conta criada com sucesso.')
+               
                 setTimeout(() => {
                     navigate('/emailconfirm');
-                }, 5000);
-                setSubmitting(false);
-                
-                console.log(useremail);
+                }, 2000);
             } catch (error) {
                 console.error('Error:', error);
                 setSubmitting(false);
@@ -75,7 +76,7 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
     return (
         <>
             {openModalTwo ?
-                <EmailContext.Provider value={values.useremail}>
+                <RegisterWrapper>
                     <RegisterDiv onSubmit={handleSubmit}>
                         <CloseBTN onClick={() => {
                             setopenModalTwo(false);
@@ -189,7 +190,8 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
                         </ThemeProvider>
 
                     </RegisterDiv>
-                </EmailContext.Provider>
+                    
+                </RegisterWrapper>
                 : null}
 
         </>

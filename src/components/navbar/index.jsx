@@ -26,15 +26,24 @@ export const Navbar = () => {
  
     const location = useLocation();
     const [navBg, setnavBg] = useState("transparent");
+    const [navDisplay, setnavDisplay] = useState("flex")
 
     useEffect(() => {
         if(window.location.pathname === '/appointment'){
             setnavBg("#111111");
         } 
         else {
-            setnavBg("transparent")
+            setnavBg("transparent");
         }
     });
+
+    useEffect(() => {
+        if(window.location.pathname === '/emailconfirm'){
+            setnavDisplay("none");
+        } else {
+            setnavDisplay("flex");
+        }
+    })
 
     const getScroll = () => {
         if(window.scrollY < 60){
@@ -86,7 +95,7 @@ export const Navbar = () => {
     return (
         <>
             <Navigation style={{backgroundColor: navBg}}>
-                <Nav>
+                <Nav style={{display: navDisplay}}>
                     <LogoDiv to="/">
                         <Logo alt="Brasil Barber's" src={barber}/>
                     </LogoDiv>
