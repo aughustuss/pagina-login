@@ -78,6 +78,27 @@ const loginUser = async(req,res) =>{
 }         
 }
 
+const getProfile = async(req,res) =>{
+    try{
+        const user = await User.findById(req.params.id);
+
+        //verify if id exists
+        if(!user){
+            return res.status(404).json({error:'Perfil não encontrado'})
+        }
+        //verify if the email has been confirmed
+        if(!user.emailConfirmed){
+            return res.status(404).json({error:'O e-mail não está confirmado'})
+        }
+        //show user 
+        res.send(user);
+
+    }catch(err){
+        console.error(err);
+        return res.status(400).json({message: 'Ocorreu um erro ao mostrar o perfil do usuario'});
+    }
+}
+
 
 const confirmEmail = async(req,res) =>{
     const {useremail,confirmationCode} = req.body;
@@ -200,6 +221,7 @@ const verifyPasswordReset = async(req,res) =>{
 module.exports = {
     registerUser,
     loginUser,
+    getProfile,
     confirmEmail,
     sendPasswordReset,
     verifyPasswordReset
