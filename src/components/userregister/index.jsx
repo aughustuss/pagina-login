@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     RegisterDiv,
     RegisterTitle,
@@ -15,10 +15,10 @@ import { Key, Mail, Phone, AccountBox } from "@mui/icons-material";
 import { Formik, useFormik } from "formik";
 import { registerSchema } from "../../validations/userregister";
 import axios from "axios";
-
+import { useNavigate, Navigate } from "react-router-dom";
 
 export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal}) => {
-   
+
     const theme = createTheme({
         palette:{
             mode: 'light',
@@ -31,7 +31,9 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
         }
     }) 
 
-    const {values, errors, handleChange, handleSubmit, isSubmitting} = useFormik({
+    const navigate = useNavigate();
+
+    const {values, errors, handleChange, handleSubmit, isSubmitting, resetForm} = useFormik({
         initialValues: {
             username: "",
             userlastname: "",
@@ -45,7 +47,8 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
         onSubmit: async (values, { setSubmitting }) => {
             try {
               const response = await axios.post('http://localhost:8000/auth/register', values);
-              console.log('Response:', response.data);
+              resetForm();
+              navigate('../pages/emailconfirm')
               setSubmitting(false);
             } catch (error) {
               console.error('Error:', error);
@@ -169,7 +172,7 @@ export const UserRegister = ({openModalTwo, setopenModalTwo, closeRegisterModal,
                         openLoginModal(true);
                     }}>Já possui uma conta? Clique aqui.</AccLink>
 
-                 </ThemeProvider>
+                 </ThemeProvider> 
             </RegisterDiv> 
             
             : null}
