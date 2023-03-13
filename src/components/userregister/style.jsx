@@ -4,26 +4,25 @@ import { Link } from "react-router-dom";
 export const RegisterWrapper = styled.div`
     height: fit-content;
     width: 450px;
-    background-color: #FFF;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 2.5px;
-    padding: 1rem;
-    box-sizing: border-box;
+    
     display: flex;
     flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     z-index: 1000;
 `
 
 export const RegisterDiv = styled.form`
-
+    padding: 1rem;
+    background-color: #FFF;
     width: 100%;
     display: flex;
     flex-direction: column;
-    
+    box-sizing: border-box; 
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 4px;
 `
 
 export const RegisterSpan = styled.span`
@@ -109,14 +108,36 @@ export const Loading= styled.span`
 
 `
 
-export const SuccessDiv = styled.div`
+export const UnsuccessDiv = styled.div`
+    opacity: 0;
+    
+`
 
+export const SuccessDiv = styled.div`
+    opacity: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: green;
+    color: white;
+    height: 100%;
+    width: 100%;
+    animation: showDiv .5s ease-in;
+    background-color: rgba(119, 255, 149, 0.8);
+    padding: 1rem;
+    border-radius: 4px;
 
+    @keyframes showDiv {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+        
+    }
 `
+
+
 
 export const NoDisplayDiv = styled.div`
     

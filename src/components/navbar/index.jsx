@@ -76,9 +76,11 @@ export const Navbar = () => {
     })
 
     const getScroll = () => {
-        if(window.scrollY < 60){
+        if(window.scrollY > 60){
             setnavBg("black");
-        };
+        } else {
+            setnavBg("transparent");
+        }
     }
 
     window.addEventListener('scroll', getScroll);

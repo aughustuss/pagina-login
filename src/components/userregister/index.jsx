@@ -10,20 +10,22 @@ import {
     Loading,
     SuccessDiv,
     NoDisplayDiv,
-    RegisterWrapper
+    RegisterWrapper,
+    UnsuccessDiv
 } from './style'
 
+import * as yup from 'yup'
 import { Button, TextField, createTheme, ThemeProvider, InputAdornment } from "@mui/material";
 import { Key, Mail, Phone, AccountBox } from "@mui/icons-material";
 import { Formik, useFormik } from "formik";
-import { registerSchema } from "../../validations/userregister";
 import axios from "axios";
 import { useNavigate, Navigate } from "react-router-dom";
-import EmailConfirm from "../../pages/emailconfirm";
+import { registerSchema } from '../../validations/userregister'
 
 export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal, openLoginModal }) => {
 
-    const [successDiv, setSuccessDiv] = useState(false);
+    const [usedEmailMsg, setUsedEmailMsg] = useState('');
+    const [submitted, setSubmitted] = useState(false);
     const theme = createTheme({
         palette: {
             mode: 'light',
@@ -38,9 +40,7 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
 
     const navigate = useNavigate();
 
-
-
-    const { values, errors, handleChange, handleSubmit, isSubmitting, resetForm } = useFormik({
+    const { values, errors, handleChange, handleSubmit, isSubmitting, resetForm, touched } = useFormik({
         initialValues: {
             username: "",
             userlastname: "",
@@ -53,38 +53,46 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
 
         onSubmit: async (values, { setSubmitting }) => {
             try {
-                const response = await axios.post('http://localhost:8000/auth/register', values);
-                resetForm();
-                setSuccessDiv(true); 
-                setSubmitting(false);
-                setopenModalTwo(false);
-                localStorage.setItem('useremail', values.useremail);
-                alert('Conta criada com sucesso.')
-               
-                setTimeout(() => {
-                    navigate('/emailconfirm');
-                }, 2000);
+                const response = await axios.post('http://localhost:8000/auth/register', values); 
+                    setSubmitted(true);
+                    setSubmitting(false);
+                    localStorage.setItem('useremail', values.useremail);
+                    resetForm();
+                    setTimeout(() => {
+                        setopenModalTwo(false);
+                        navigate('/emailconfirm');
+                    }, 3000); 
+                
             } catch (error) {
+                if(error.response.data){
+                    setUsedEmailMsg('Email já está em uso.');
+                } else {
+                    setUsedEmailMsg('')
+                }
                 console.error('Error:', error);
                 setSubmitting(false);
             }
         }
 
     });
-
+    console.log(usedEmailMsg);
 
     return (
         <>
             {openModalTwo ?
                 <RegisterWrapper>
+                    {submitted ?
                     <RegisterDiv onSubmit={handleSubmit}>
+                        
                         <CloseBTN onClick={() => {
                             setopenModalTwo(false);
                         }} >X</CloseBTN>
-
+                        
                         <RegisterSpan><AccountBox style={{ width: "42px", height: "42px" }} /></RegisterSpan>
+                        
                         <RegisterTitle>Crie a sua conta</RegisterTitle>
-
+                        
+                         
                         <ThemeProvider theme={theme}>
 
                             <RegisterName style={{ marginBottom: "1em" }}  >
@@ -119,7 +127,7 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
                                 variant="outlined"
                                 value={values.useremail}
                                 onChange={handleChange}
-                                helperText={errors.useremail && errors.useremail}
+                                helperText={touched.useremail && errors.useremail ? errors.useremail : usedEmailMsg}
                                 style={{ marginBottom: "1em" }}
                                 InputProps={
                                     {
@@ -188,9 +196,9 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
                             }}>Já possui uma conta? Clique aqui.</AccLink>
 
                         </ThemeProvider>
-
+                        
                     </RegisterDiv>
-                    
+                    : <SuccessDiv>Conta criada com sucesso. </SuccessDiv> }
                 </RegisterWrapper>
                 : null}
 
