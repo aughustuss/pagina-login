@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import User from "../models/User.js";
-import TokenUtils from '../utils/token.js'
 import emailUtils from '../utils/email.js';
+import TokenUtils from '../utils/token.js'
 
 class UserController{
 
@@ -78,6 +78,7 @@ class UserController{
             return res.status(400).json({ error: err.message });
     }         
     }
+
 
     static async getProfile (req,res){
         try{
