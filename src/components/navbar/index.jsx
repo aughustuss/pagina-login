@@ -76,7 +76,7 @@ export const Navbar = () => {
     })
 
     const getScroll = () => {
-        if(window.scrollY > 60){
+        if(window.scrollY > 100){
             setnavBg("black");
         } else {
             setnavBg("transparent");
@@ -125,7 +125,7 @@ export const Navbar = () => {
     return (
         <>
             <Navigation>
-                <Nav style={{display: navDisplay, backgroundColor: navBg }}>
+                <Nav style={{display: navDisplay, backgroundColor: navBg, transition: "all .5s ease-in-out" }}>
                     <LogoDiv to="/">
                         <Logo alt="Brasil Barber's" src={barber}/>
                     </LogoDiv>
