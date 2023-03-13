@@ -81,7 +81,7 @@ export const UserRegister = ({ openModalTwo, setopenModalTwo, closeRegisterModal
         <>
             {openModalTwo ?
                 <RegisterWrapper>
-                    {submitted ?
+                    {!submitted ?
                     <RegisterDiv onSubmit={handleSubmit}>
                         
                         <CloseBTN onClick={() => {
