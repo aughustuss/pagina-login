@@ -23,4 +23,4 @@ function isPasswordValid(password){
 
 }
 
-module.exports=isPasswordValid
+export default isPasswordValid;

@@ -2,19 +2,21 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "vnn",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "googleapis": "^112.0.0",
     "jsonwebtoken": "^9.0.0",
-    "mongose": "^0.0.2-security",
-    "nodemailer": "^6.9.1"
+    "mongoose": "^7.0.1",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.21"
   }
 }

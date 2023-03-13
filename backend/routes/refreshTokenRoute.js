@@ -1,8 +1,7 @@
-const express = require('express');
-const renewRefreshToken = require('../utils/token');
+import express from 'express'
+import TokenUtils from '../utils/token.js';
 
 const router = express.Router();
-
 
 //route for update token
 router.post('/refresh-token',async(req,res)=>{
@@ -10,7 +9,7 @@ router.post('/refresh-token',async(req,res)=>{
 
     try{
         //renew access token
-        const accessToken = await renewRefreshToken(refreshToken);
+        const accessToken = await TokenUtils.renewRefreshToken(refreshToken);
 
         //send new tokens
         res.json({accessToken});
@@ -21,5 +20,4 @@ router.post('/refresh-token',async(req,res)=>{
     }
 })
 
-
-module.exports = router;
+export default router
