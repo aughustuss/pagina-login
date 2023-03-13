@@ -39,21 +39,35 @@ class TokenUtils{
         }
     }
 
+    static generateAcessToken(user){
+        try{
+            const accessToken = jwt.sign(
+                { userId: user.id },
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
+            );
+
+        }catch(err){
+            console.err(err);
+            throw err;
+        }
+    }
+
     static async renewRefreshToken (refreshToken) {
         try{
             //verify if refresh token is valid and get user id
-            const decoded = '';
+            const decoded = jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET);
             const userId = decoded._id;
 
             //verify if the refresh token exists on db
-            const refreshTokenDoc = await RefreshToken.findOne({ _id, token: refreshToken })
+            const refreshTokenDoc = await RefreshToken.findOne({userId, token: refreshToken })
             if(!refreshTokenDoc){
                 return new Error("Refresh Token Invalido")
             }
 
             //generate a new access token
             const user = await User.findById(userId);
-            const accessToken = ''
+            const accessToken = this.generateAcessToken(user)
 
             return accessToken
 
